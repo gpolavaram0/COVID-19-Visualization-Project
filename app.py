@@ -25,11 +25,13 @@ app = Flask(__name__)
 @app.route("/")
 def welcome():
     """List all available api routes."""
-    return (
-        f"Available Routes:<br/>"
-        f"/api/v1.0/stocks<br/>"
-        f"/api/v1.0/hospitals"
-    )
+#     return (
+#         f"Available Routes:<br/>"
+#         f"/api/v1.0/stocks<br/>"
+#         f"/api/v1.0/hospitals"
+#     )
+
+    return render_template("index.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

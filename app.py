@@ -12,6 +12,16 @@ from flask import Flask, jsonify, render_template
 # Database Setup
 #################################################
 
+# DATABASE_URL will contain the database connection string:
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+# Connects to the database using the app config
+db = SQLAlchemy(app)
+
+# session.query(Invoices.BillingCountry).group_by(Invoices.BillingCountry).all()
+
+db.session.query(test_data_csv).all()
+
+
 #################################################
 # Flask Setup
 #################################################

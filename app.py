@@ -46,7 +46,7 @@ def test():
     #     f"/api/v1.0/passengers"
     # )
 
-    test_dict = {"key":"value"}
+    test_dict = {"key":DATABASE_URL}
 
     return test_dict
 

@@ -8,6 +8,13 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify, render_template
 
 
+
+
+#################################################
+# Flask Setup
+#################################################
+app = Flask(__name__)
+
 #################################################
 # Database Setup
 #################################################
@@ -20,12 +27,6 @@ db = SQLAlchemy(app)
 # session.query(Invoices.BillingCountry).group_by(Invoices.BillingCountry).all()
 
 db.session.query(test_data_csv).all()
-
-
-#################################################
-# Flask Setup
-#################################################
-app = Flask(__name__)
 
 
 #################################################

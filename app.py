@@ -45,7 +45,18 @@ def welcome():
 
     return render_template("index.html")
 
+@app.route("/test")
+def test():
+    # """List all available api routes."""
+    # return (
+    #     f"Available Routes:<br/>"
+    #     f"/api/v1.0/names<br/>"
+    #     f"/api/v1.0/passengers"
+    # )
 
+    test_dict = {"key":"value"}
+
+    return test_dict
 
 if __name__ == '__main__':
     app.run(debug=True)

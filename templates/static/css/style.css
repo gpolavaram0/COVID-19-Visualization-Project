@@ -1,5 +1,6 @@
 body {
     background-color:darkslategray;
+    width: 100%;
 }
 
 .lead {
@@ -40,13 +41,55 @@ img.blur {
     width:100%;
 }
 
+.form-control, .comparator {
+    margin-left: auto;
+    margin-right: auto;
+}
 
-#infection-heatmap, #stock-candlestick, #weather-heatmap, body, html {
+#infection-heatmap, .stock, .weather, body, html {
     height:100%;
+    display:inline-block;
 }
 
 #infection-heatmap {
-    margin-left:2%;
+    margin-left: 5.6%;
+    margin-right: 5.3%;
+}
+
+.stock {
+    display: none;
+}
+
+.info {
+    width: 75%;
+    margin-left: auto;
+    margin-right:auto;
+    margin-bottom: 1%;
+    background:rgba(230, 225, 225, 0.616);
+    border-radius: 3px;
+    text-align: center;
+}
+
+ul {
+    list-style-type:none;
+}
+
+.legend {
+    color: #555;
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
 }
 
 @media (max-width: 768px) {

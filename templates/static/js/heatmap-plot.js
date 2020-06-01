@@ -14,62 +14,36 @@ d3.csv("data/county_clean.csv", infectionData => {
         d.cases = +d.cases;
         d.deaths = +d.deaths;
     });
+    //Initial filter for data
+    let dataFiltered = infectionData.filter(d => d.date === "2020-05-25");
 
-    //Create datasets for heatmap
-    let testDataInfection = {
-        min: 0,
-        max: d3.max(infectionData, d => d.cases),
-        data: infectionData
-    };
-    let testDataDeath = {
-        min: 0,
-        max: d3.max(infectionData, d => d.deaths),
-        data: infectionData
-    };
+    //Create data arrays for heatmap layers
+    let infectionArr = [];
+    let deathArr = [];
+    //Iterate through filtered data to append data arrays
+    dataFiltered.forEach(d => {
+        infectionArr.push([d.lat, d.long, d.cases]);
+        deathArr.push([d.lat, d.long, d.deaths]);
+    });
+
+    //Create Heatmap layers
+    let infectionLayer = L.heatLayer(infectionArr);
+    let deathLayer = L.heatLayer(deathArr);
 
     //Set base layer for the map
     const baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
         attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
         maxZoom: 18,
-        id: "streets-v9",
+        id: "streets-v11",
         accessToken: API_KEY
         });
-
-    //Set the config options for the infection heatmap layer
-    const cfgInfection = {
-        "radius": 2,
-        "maxOpacity": .8,
-        "scaleRadius": true,
-        "useLocalExtrema": false,
-        latField: "lat",
-        lngField: "long",
-        valueField: "cases"
-    };
-    //Set the config options for the death heatmap layer
-    const cfgDeath = {
-        "radius": 2,
-        "maxOpacity": .8,
-        "scaleRadius": true,
-        "useLocalExtrema": false,
-        latField: "lat",
-        lngField: "long",
-        valueField: "deaths",
-    };
-
-    //Create the heatmap layers
-    const infectionLayer = new HeatmapOverlay(cfgInfection);
-    const deathLayer = new HeatmapOverlay(cfgDeath);
 
     //create map
     const myMap = L.map("infection-heatmap", {
         center: [39.50, -98.35],
-        zoom: 5,
+        zoom: 4,
         layers: [baseLayer, infectionLayer]
     });
-
-    //Set data for heatmap layers
-    infectionLayer.setData(testDataInfection);
-    deathLayer.setData(testDataDeath);
 
     //Set Overlay Layers
     const overlayMaps = {
@@ -80,27 +54,50 @@ d3.csv("data/county_clean.csv", infectionData => {
     //Create Layer control
     L.control.layers(overlayMaps).addTo(myMap);
 
-    //Function to redraw data based on date
-    function dataFilter() {
-        //Grab Date value
+    //Add legend to map
+    legend.addTo(myMap);
+
+    //Function to redraw heatmap
+    function renderHeatmap() {
+        //Grab input value
         const dateValue = dateInput.property("value");
-        //Filter data based on date input
-        const dataFiltered = infectionData.filter(d => d.date === dateValue);
-        //Reset Heatmap Data
-        testDataInfection = {
-            min: 0,
-            max: d3.max(dataFiltered, d => d.cases),
-            data: dataFiltered
-        };
-        testDataDeath = {
-            min: 0,
-            max: d3.max(dataFiltered, d => d.deaths),
-            data: dataFiltered
-        };
-        //Redraw heatmap layers
-        infectionLayer.setData(testDataInfection);
-        deathLayer.setData(testDataDeath);
+        
+        //Refilter data
+        dataFiltered = infectionData.filter(d => d.date === dateValue);
+        
+        //Reset data arrays for heatmap layers
+        let infectionArr = [];
+        let deathArr = [];
+        //Iterate through filtered data to append data arrays
+        dataFiltered.forEach(d => {
+            infectionArr.push([d.lat, d.long, d.cases]);
+            deathArr.push([d.lat, d.long, d.deaths]);
+        });
+        //Reset the layers and redraw
+        infectionLayer.setLatLngs(infectionArr);
+        deathLayer.setLatLngs(deathArr);
     }
+
     //Event handler to change heatmap on user input
-    dateInput.on("change", dataFilter);
+    dateInput.on("change", renderHeatmap);
 });
+
+//Create legend for the map
+const legend = L.control({position: "bottomleft"});
+//Function to add legend to map
+legend.onAdd = function (map) {
+    //Div for the legend
+    var div = L.DomUtil.create('div', 'legend');
+        //Create labels for the legend
+        const grades = ["Least", "", "", "", "Most"];
+        const colors = ["blue", "cyan", "lime", "yellow", "red"];
+        const labels = [];
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < colors.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + colors[i] + '"></i>' +
+            grades[i] + '<br><br>';
+    }
+    //return the div with label
+    return div;
+}   

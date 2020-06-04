@@ -31,7 +31,17 @@ import psycopg2
 #################################################
 app = Flask(__name__)
 
+###############################
+app._static_folder = 'static/'
 
+# load the tickers we want into a dataframe
+tickers = pd.DataFrame({
+    'Sector' : ['Retail', 'Retail', 'Tech', 'Tech', 'Entertainment', 'Entertainment', 'Ecommerce', 'Ecommerce', 'Airline', 'Airline'],
+    'Name' : ['Walmart', 'Target', 'Nvidia', 'Zoom', 'Spotify', 'Netflix', 'Amazon', 'Shopify', 'Delta', 'United Airlines'],
+    'Ticker' : ['WMT', 'TGT', 'NVDA', 'ZM', 'SPOT', 'NFLX', 'AMZN', 'SHOP', 'DAL', 'UAL'],
+})
+
+##################################
 
 # DATABASE_URL will contain the database connection string:
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hdjdaacogqimcu:a6007ea2abde788e2b86e856357cb8741377410b135800ea087bd2780f50e2fb@ec2-52-44-55-63.compute-1.amazonaws.com:5432/dbh8e6jsnrlr1k'
@@ -81,10 +91,18 @@ def test():
     # )
 
     # results = session.query(county.county).all()
-    x = db.session.query(test_data).all()
+    x = db.session.query(test_data.c.state).all()
     test_dict = {"key":"value"}
 
     return jsonify(x)
+
+@app.route("/stocks")
+def stocks():
+
+    stock_data = get_data.main()
+
+    return render_template('index2.html', stock_data = stock_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

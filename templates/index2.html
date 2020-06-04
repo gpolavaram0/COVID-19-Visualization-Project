@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+
+	<title>Project 2</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+</head>
+
+</body>
+
+	<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+	<script type="text/javascript" src="/static/billboard.min.js"></script>
+
+    <link rel="stylesheet" href="/static/billboard.min.css">
+
+
+
+    
+	<script>
+
+	var stock_data = {{ stock_data | safe }};
+	var comps = ['WMT', 'TGT', 'NVDA', 'ZM', 'SPOT', 'NFLX', 'AMZN', 'SHOP', 'DAL', 'UAL'];
+    var comp1 = comps[0]
+    var comp2 = comps[1]
+    var comp3 = comps[2]
+    var comp4 = comps[3]
+    var comp5 = comps[4]
+    var comp6 = comps[5]
+    var comp7 = comps[6]
+    var comp8 = comps[7]
+    var comp9 = comps[8]
+    var comp10 = comps[9]
+
+
+	var comp1_data = stock_data[comp1]
+    var comp2_data = stock_data[comp2]
+    var comp3_data = stock_data[comp3]
+    var comp4_data = stock_data[comp4]
+    var comp5_data = stock_data[comp5]
+    var comp6_data = stock_data[comp6]
+    var comp7_data = stock_data[comp7]
+    var comp8_data = stock_data[comp8]
+    var comp9_data = stock_data[comp9]
+    var comp10_data = stock_data[comp10]
+
+
+	var dates = stock_data['date']
+
+    /* console.log(dates);
+    console.log(comp1_data);
+    console.log(comp2_data);
+    console.log(comp3_data); */
+
+    /* Retail Chart */
+    var chart = bb.generate({
+        title: {
+            text: "Retail Market - Walmart (WMT) vs Target (TGT)"
+        },
+
+      bindto: "#Retailchart",
+	  data: {
+          x: "date",
+          columns: [
+	          dates,
+	          comp1_data, comp2_data
+          ],
+          types: {
+	         "WMT": "area-line-range",
+             "TGT": "area-line-range",
+          },
+          colors: {
+	         "WMT": "red",
+             "TGT": "green",
+	      },
+
+	     axes: {
+	        "WMT": "y",
+            "TGT": "y",
+          }
+          
+	  },
+
+	  axis: {
+	    x: {
+	      type: "timeseries",
+	      tick: {
+	        format: "%Y-%m-%d"
+	      }
+        },
+
+	  },
+
+
+	});
+
+    /* Technology Chart */
+    var chart = bb.generate({
+        title: {
+            text: "Technology Market - Nvidia (NVDA) vs Zoom (ZM)"
+        },
+
+	  bindto: "Techchart",
+	  data: {
+          x: "date",
+          columns: [
+	          dates,
+	          comp3_data, comp4_data 
+          ],
+          types: { 
+	         "NVDA": "area-line-range",
+             "ZM": "area-line-range",
+             
+          },
+          colors: {
+	         "NVDA": "red",
+             "ZM": "green",
+
+	      },
+
+	     axes: {
+	        "NVDA": "y",
+            "ZM": "y",
+	      }
+	  },
+
+	  axis: {
+	    x: {
+	      type: "timeseries",
+	      tick: {
+	        format: "%Y-%m-%d"
+	      }
+        },
+	  },
+	});
+
+    /* Entertainment Chart */
+    var chart = bb.generate({
+        title: {
+            text: "Entertainment Market - Spotify (SPOT) vs Netflix (NFLX)"
+        },
+
+	  bindto: "Enterchart",
+	  data: {
+          x: "date",
+          columns: [
+	          dates,
+	          comp5_data, comp6_data 
+          ],
+          types: {
+	         "SPOT": "area-line-range",
+             "NFLX": "area-line-range",
+             
+          },
+          colors: {
+	         "SPOT": "red",
+             "NFLX": "green",
+
+	      },
+
+	     axes: {
+	        "SPOT": "y",
+            "NFLX": "y",
+	      }
+	  },
+
+	  axis: {
+	    x: {
+	      type: "timeseries",
+	      tick: {
+	        format: "%Y-%m-%d"
+	      }
+        },
+ 
+	  },
+	});
+
+    /* eCommerce Chart */
+    var chart = bb.generate({
+        title: {
+            text: "eCommerce Market - Amazon (AMZN) vs Shopify (SHOP)"
+        },
+
+	  bindto: "Comchart",
+	  data: {
+          x: "date",
+          columns: [
+	          dates,
+	          comp7_data, comp8_data 
+          ],
+          types: { 
+	         "AMZN": "area-line-range",
+             "SHOP": "area-line-range",
+             
+          },
+          colors: {
+	         "AMZN": "red",
+             "SHOP": "green",
+
+	      },
+
+	     axes: {
+	        "AMZN": "y",
+            "SHOP": "y",
+	      }
+	  },
+
+	  axis: {
+	    x: {
+	      type: "timeseries",
+	      tick: {
+	        format: "%Y-%m-%d"
+	      }
+        },
+	  },
+	});
+    
+    /* Airline Chart */
+    var chart = bb.generate({
+        title: {
+            text: "Airline Market - Delta (DAL) vs United (UAL)"
+        },
+	  bindto: "Airlinechart",
+	  data: {
+          x: "date",
+          columns: [
+	          dates,
+	          comp9_data, comp10_data 
+          ],
+          types: { 
+	         "DAL": "area-line-range",
+             "UAL": "area-line-range",
+             
+          },
+          colors: {
+	         "DAL": "red",
+             "UAL": "green",
+
+	      },
+
+	     axes: {
+	        "DAL": "y",
+            "UAL": "y",
+	      }
+	  },
+
+	  axis: {
+	    x: {
+	      type: "timeseries",
+	      tick: {
+	        format: "%Y-%m-%d"
+	      }
+        },
+	  },
+	});
+
+	</script>
+
+</html>

@@ -8,7 +8,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 from flask_sqlalchemy import SQLAlchemy
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, redirect
+import get_data
 
 import psycopg2
 

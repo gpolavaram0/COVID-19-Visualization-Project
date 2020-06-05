@@ -57,7 +57,38 @@ test_data = db.Table('test_data_csv', db.metadata, autoload = True, autoload_wit
 # Base.prepare(engine, reflect=True)
 # test_data_csv = Base.classes.test_data_csv
 
+# infection_date = db.Table('infection_date', db.metadata, autoload = True, autoload_with = db.engine)
 
+# infection_date = db.Table('infection_date', db.metadata, autoload = True, autoload_with = db.engine)
+# infection_date_query = db.session.query(infection_date).all()
+
+###############infection_date#########################
+
+#extracts infection_date_csv from postgres and converts to list of dictionaries in route /infection_date
+# infection_date = db.Table('infection_date', db.metadata, autoload = True, autoload_with = db.engine)
+# infection_date_query = db.session.query(infection_date).all()
+# infection_date_df = pd.DataFrame(infection_date_query, columns = ['date','cases','deaths'])
+# infection_date_df = infection_date_df.reset_index(drop=True)
+# infection_date_lod = infection_date_df.to_dict('records')
+######################################################
+
+def database_csv_retriever(csv_name, *args):
+    csv_name_db = db.Table(csv_name, db.metadata, autoload = True, autoload_with = db.engine)
+    csv_query = db.session.query(csv_name_db).all()
+    csv_date_df = pd.DataFrame(csv_query, columns = args)
+    csv_date_df = csv_date_df.reset_index(drop=True)
+    csv_lod = csv_date_df.to_dict('records')
+
+    return csv_lod
+
+# csv_name_db = db.Table("air_line", db.metadata, autoload = True, autoload_with = db.engine)
+# csv_query = db.session.query(csv_name_db).column_descriptions()
+
+# for title in csv_query:
+#     print(title)
+
+# x = db.session.query(infection_date).all()
+# print(x)
 # session.query(Invoices.BillingCountry).group_by(Invoices.BillingCountry).all()
 
 
@@ -84,18 +115,40 @@ def welcome():
 
 @app.route("/test")
 def test():
-    # """List all available api routes."""
-    # return (
-    #     f"Available Routes:<br/>"
-    #     f"/api/v1.0/names<br/>"
-    #     f"/api/v1.0/passengers"
-    # )
+   
 
     # results = session.query(county.county).all()
     x = db.session.query(test_data).all()
     test_dict = {"key":"value"}
-
+    print(x)
     return jsonify(x)
+
+@app.route("/air_quality")
+def air_quality():
+    air_quality_lod = database_csv_retriever("county_clean","index","latitude","longitude","parameter","pollutant_standard","date_local","units_of_measure","observation_count","observation_percent","state","county","city")
+    return jsonify(air_quality_lod)
+
+
+@app.route("/county_clean")
+def county_clean():
+    county_clean_lod = database_csv_retriever("county_clean","index","county","state","lat","long","date","cases","deaths")
+    return jsonify(county_clean_lod)
+
+@app.route("/infection_date")
+def infection_date():
+    infection_date_lod = database_csv_retriever("infection_date",'date','cases','deaths')
+    return jsonify(infection_date_lod)
+
+@app.route("/air_line")
+def air_line():
+
+    # infection_date = db.Table('air_line', db.metadata, autoload = True, autoload_with = db.engine)
+    # infection_date_query = db.session.query(infection_date).all()
+    # infection_date_df = pd.DataFrame(infection_date_query, columns = ['date','cases','deaths'])
+    # infection_date_df = infection_date_df.reset_index(drop=True)
+    # infection_date_lod = infection_date_df.to_dict('records')
+    air_line_lod = database_csv_retriever("air_line","date_local","parameter","observation_count")
+    return jsonify(air_line_lod)
 
 @app.route("/stocks")
 def stocks():

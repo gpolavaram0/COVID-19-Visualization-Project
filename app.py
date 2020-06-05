@@ -92,7 +92,7 @@ def test():
     # )
 
     # results = session.query(county.county).all()
-    x = db.session.query(test_data.c.state).all()
+    x = db.session.query(test_data).all()
     test_dict = {"key":"value"}
 
     return jsonify(x)

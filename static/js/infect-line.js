@@ -51,10 +51,10 @@ function runiLine() {
             const startDate = iLineStart.property("value");
             const endDate = iLineEnd.property("value");
             //Filter data
-            const dataFiltered = infectionData.filter(d => d.date >= startDate && d.date <= endDate);
+            const dataFiltered = infectionData.filter(d => d.date_local >= startDate && d.date_local <= endDate);
             //Reset x values
-            const ix = dataFiltered.map(d => d.date);
-            const dx = dataFiltered.map(d => d.date);
+            const ix = dataFiltered.map(d => d.date_local);
+            const dx = dataFiltered.map(d => d.date_local);
             //Reset y values
             const iy = dataFiltered.map(d => d.cases);
             const dy = dataFiltered.map(d => d.deaths);

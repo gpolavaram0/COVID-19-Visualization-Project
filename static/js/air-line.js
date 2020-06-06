@@ -6,7 +6,9 @@ const aLineEnd = d3.select("#end-date");
 d3.json("https://covid19bootcampproject3.herokuapp.com/air_line", airData => {
     //Parse through the data
     airData.forEach(d => {
+        console.log(`Before:${d.date}`);
         d.date = parseTime(d.date);
+        console.log(`After:${d.date}`);
         d.observation_count = +d.observation_count
     });
     //Filter data by parameter

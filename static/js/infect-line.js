@@ -8,7 +8,7 @@ function runiLine() {
     d3.json("https://covid19bootcampproject3.herokuapp.com/infection_date", infectionData => {
         //Parse through the data
         infectionData.forEach(d => {
-            d.date = parseTime(d.date);
+            d.date = formatTime(d.date);
             d.cases = +d.cases;
             d.deaths = +d.deaths;
         });

@@ -3,13 +3,14 @@ const infectionDate = d3.select("#date-input");
 const infectionDateType = d3.select("#date-type");
 //Date parser
 const parseTime = d3.timeParse("%Y-%m-%d");
+const formatTime = d3.timeFormat("%Y-%m-%d");
 //Function to run code
 function runInfection() {
     //Read in infection & death data
     d3.json("https://covid19bootcampproject3.herokuapp.com/county_clean", infectionData => {
         //Parse through data
         infectionData.forEach(d => {
-            d.date = parseTime(d.date);
+            d.date = formatTime(d.date);
             d.cases = +d.cases;
             d.deaths = +d.deaths;
         });

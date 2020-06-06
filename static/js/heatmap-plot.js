@@ -2,7 +2,7 @@
 const infectionDate = d3.select("#date-input");
 const infectionDateType = d3.select("#date-type");
 //Date parser
-const parseTime = d3.timeParse("%Y-%m-%d");
+const parseTime = d3.timeParse("%a, %d %b %Y %H:%M:%S");
 const formatTime = d3.timeFormat("%Y-%m-%d");
 //Function to run code
 function runInfection() {

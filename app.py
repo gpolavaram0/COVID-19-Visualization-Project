@@ -82,7 +82,7 @@ def database_csv_retriever(csv_name, *args):
     # print(csv_query)
     csv_date_df = pd.DataFrame(csv_query, columns = args)
     csv_date_df = csv_date_df.reset_index(drop=True)
-    csv_date_df['date'] = csv_date_df['date'] .astype(str)
+    csv_date_df['date_local'] = csv_date_df['date_local'].astype(str)
     # print(csv_date_df)
     csv_lod = csv_date_df.to_dict('records')
     # print(csv_lod)
@@ -147,7 +147,7 @@ def county_clean():
 
 @app.route("/infection_date")
 def infection_date():
-    infection_date_lod = database_csv_retriever("infection_date",'date','cases','deaths')
+    infection_date_lod = database_csv_retriever("infection_date",'date_local','cases','deaths')
     return jsonify(infection_date_lod)
 
 @app.route("/air_line")

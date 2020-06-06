@@ -46,21 +46,17 @@ img.blur {
     margin-right: auto;
 }
 
-#infection-heatmap, .stock, .weather, body, html {
+#infection-heatmap, .stock, .weather:not(#weather-line), .popDen,body, html {
     height:100%;
     display:inline-block;
 }
 
-#infection-heatmap {
+#infection-heatmap, #infection-line {
     margin-left: 5.6%;
     margin-right: 5.3%;
 }
 
-.stock {
-    display: none;
-}
-
-.info {
+.information {
     width: 75%;
     margin-left: auto;
     margin-right:auto;
@@ -90,6 +86,55 @@ ul {
     float: left;
     margin-right: 8px;
     opacity: 0.7;
+}
+
+.information li>span {
+    font-weight: bold;
+}
+
+#reference {
+    width: 50%;
+}
+
+#date-type {
+    margin-right: 0;
+    margin-left: 1%;
+}
+
+#comparison {
+    margin-right: 1%;
+}
+
+.text-muted {
+    color: rgb(186, 189, 194)!important;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.form-group {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    opacity: .3;
+}
+
+.line-pop {
+    height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 @media (max-width: 768px) {

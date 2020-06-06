@@ -45,11 +45,15 @@ tickers = pd.DataFrame({
 ##################################
 
 # DATABASE_URL will contain the database connection string:
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hdjdaacogqimcu:a6007ea2abde788e2b86e856357cb8741377410b135800ea087bd2780f50e2fb@ec2-52-44-55-63.compute-1.amazonaws.com:5432/dbh8e6jsnrlr1k'
+
+# engine = create_engine('postgresql://scott:tiger@localhost/mydatabase')
+
 # # Connects to the database using the app config
 db = SQLAlchemy(app)
 
-test_data = db.Table('test_data_csv', db.metadata, autoload = True, autoload_with = db.engine)
+# test_data = db.Table('test_data_csv', db.metadata, autoload = True, autoload_with = db.engine)
 # db.Model.metadata.reflect(bind=db.engine,schema='dbh8e6jsnrlr1k')
 # db.reflect(bind='__all__', app=None)
 
@@ -75,11 +79,18 @@ test_data = db.Table('test_data_csv', db.metadata, autoload = True, autoload_wit
 def database_csv_retriever(csv_name, *args):
     csv_name_db = db.Table(csv_name, db.metadata, autoload = True, autoload_with = db.engine)
     csv_query = db.session.query(csv_name_db).all()
+    # print(csv_query)
     csv_date_df = pd.DataFrame(csv_query, columns = args)
     csv_date_df = csv_date_df.reset_index(drop=True)
+    csv_date_df['date'] = csv_date_df['date'] .astype(str)
+    # print(csv_date_df)
     csv_lod = csv_date_df.to_dict('records')
+    # print(csv_lod)
 
     return csv_lod
+
+
+# database_csv_retriever("infection_date",'date','cases','deaths')
 
 # csv_name_db = db.Table("air_line", db.metadata, autoload = True, autoload_with = db.engine)
 # csv_query = db.session.query(csv_name_db).column_descriptions()
@@ -125,7 +136,7 @@ def test():
 
 @app.route("/air_quality")
 def air_quality():
-    air_quality_lod = database_csv_retriever("county_clean","index","latitude","longitude","parameter","pollutant_standard","date_local","units_of_measure","observation_count","observation_percent","state","county","city")
+    air_quality_lod = database_csv_retriever("air_quality","index","latitude","longitude","parameter","pollutant_standard","date_local","units_of_measure","observation_count","observation_percent","state","county","city")
     return jsonify(air_quality_lod)
 
 
@@ -142,11 +153,7 @@ def infection_date():
 @app.route("/air_line")
 def air_line():
 
-    # infection_date = db.Table('air_line', db.metadata, autoload = True, autoload_with = db.engine)
-    # infection_date_query = db.session.query(infection_date).all()
-    # infection_date_df = pd.DataFrame(infection_date_query, columns = ['date','cases','deaths'])
-    # infection_date_df = infection_date_df.reset_index(drop=True)
-    # infection_date_lod = infection_date_df.to_dict('records')
+
     air_line_lod = database_csv_retriever("air_line","date_local","parameter","observation_count")
     return jsonify(air_line_lod)
 

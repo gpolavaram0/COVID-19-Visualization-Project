@@ -6,17 +6,17 @@ const iLineEnd = d3.select("#end-date");
 function runiLine() {
     //Read in data
     d3.json("https://covid19bootcampproject3.herokuapp.com/infection_date", infectionData => {
-        Parse through the data
-        infectionData.forEach(d => {
-            d.date = formatTime(d.date);
-//             d.cases = +d.cases;
-            d.deaths = +d.deaths;
-        });
+//         Parse through the data
+//         infectionData.forEach(d => {
+//             d.date = formatTime(d.date);
+// //             d.cases = +d.cases;
+//             d.deaths = +d.deaths;
+//         });
 
         //Set initial traces
         let traceInfection = {
             type: "scatter",
-            x: infectionData.map(d => d.date),
+            x: infectionData.map(d => d.date_local),
             y: infectionData.map(d => d.cases),
             mode: "lines",
             name: "Infections",
@@ -27,7 +27,7 @@ function runiLine() {
         };
         let traceDeath = {
             type: "scatter",
-            x: infectionData.map(d => d.date),
+            x: infectionData.map(d => d.date_local),
             y: infectionData.map(d => d.deaths),
             mode: "lines",
             name: "Deaths",

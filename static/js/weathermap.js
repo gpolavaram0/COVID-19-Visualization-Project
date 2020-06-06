@@ -7,7 +7,10 @@ function runAir() {
     //Read in csv data
     d3.json("https://covid19bootcampproject3.herokuapp.com/air_quality", airData => {
         //Parse through data
-        airData.forEach(d => d.observation_count = +d.observation_count);
+        airData.forEach(d => {
+            d.date = parseTime(d.date);
+            d.observation_count = +d.observation_count
+        });
 
         //Set seperate objects for each parameter
         const CO = airData.filter(d => d.parameter === "Carbon monoxide");

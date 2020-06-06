@@ -5,7 +5,10 @@ const aLineEnd = d3.select("#end-date");
 //Read in data
 d3.json("https://covid19bootcampproject3.herokuapp.com/air_line", airData => {
     //Parse through the data
-    airData.forEach(d => d.observation_count = +d.observation_count);
+    airData.forEach(d => {
+        d.date = parseTime(d.date);
+        d.observation_count = +d.observation_count
+    });
     //Filter data by parameter
     const lCO = airData.filter(d => d.parameter === "Carbon monoxide");
     const lNO2 = airData.filter(d => d.parameter === "Nitrogen dioxide (NO2)");

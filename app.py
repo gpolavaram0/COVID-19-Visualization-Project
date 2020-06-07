@@ -137,9 +137,9 @@ def test():
     print(x)
     return jsonify(x)
 
-@app.route("/air_quality_truncated")
+@app.route("/air_quality")
 def air_quality():
-    air_quality_lod = database_csv_retriever("air_quality_truncated","index","latitude","longitude","parameter","pollutant_standard","date_local","units_of_measure","observation_count","observation_percent","state","county","city")
+    air_quality_lod = database_csv_retriever("air_quality","index","latitude","longitude","parameter","pollutant_standard","date_local","units_of_measure","observation_count","observation_percent","state","county","city")
     return jsonify(air_quality_lod)
 
 

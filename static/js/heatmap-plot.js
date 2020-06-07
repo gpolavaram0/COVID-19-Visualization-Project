@@ -7,7 +7,7 @@ const infectionDateType = d3.select("#date-type");
 //Function to run code
 function runInfection() {
     //Read in infection & death data
-    d3.json("https://covid19bootcampproject3.herokuapp.com/county_clean_truncated", infectionData => {
+    d3.json("https://covid19bootcampproject3.herokuapp.com/county_clean", infectionData => {
         //Parse through data
         infectionData.forEach(d => {
             d.date_local = formatTime(d.date_local);

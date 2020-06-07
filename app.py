@@ -46,7 +46,10 @@ tickers = pd.DataFrame({
 
 # DATABASE_URL will contain the database connection string:
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hdjdaacogqimcu:a6007ea2abde788e2b86e856357cb8741377410b135800ea087bd2780f50e2fb@ec2-52-44-55-63.compute-1.amazonaws.com:5432/dbh8e6jsnrlr1k'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hdjdaacogqimcu:a6007ea2abde788e2b86e856357cb8741377410b135800ea087bd2780f50e2fb@ec2-52-44-55-63.compute-1.amazonaws.com:5432/dbh8e6jsnrlr1k'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:Eagle2fox1!project2@project2db.cvkw7pcnugqv.us-east-2.rds.amazonaws.com:5432/project2db'
+
 
 # engine = create_engine('postgresql://scott:tiger@localhost/mydatabase')
 
@@ -140,9 +143,9 @@ def air_quality():
     return jsonify(air_quality_lod)
 
 
-@app.route("/county_clean_truncated")
+@app.route("/county_clean")
 def county_clean():
-    county_clean_lod = database_csv_retriever("county_clean_truncated","index","county","state","lat","long","date_local","cases","deaths")
+    county_clean_lod = database_csv_retriever("county_clean","index","county","state","lat","long","date_local","cases","deaths")
     return jsonify(county_clean_lod)
 
 @app.route("/infection_date")

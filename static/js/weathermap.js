@@ -2,10 +2,25 @@
 const airDate = d3.select("#date-input");
 const airDateType = d3.select("#date-type");
 
+//Set base layer for the map
+const baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "streets-v11",
+    accessToken: API_KEY
+    });
+
+//Create Map
+const myMap = L.map("weather-heatmap", {
+    center: [39.50, -98.35],
+    zoom: 4,
+    layers: [baseLayer]
+});
+
 //Function to run code
 function runAir() {
     //Set date value to a variable
-    const airDateValue = airDate.property("value");
+    let airDateValue = airDate.property("value");
 
     //Read in csv data
     d3.json(`https://covid19bootcampproject3.herokuapp.com/air_quality/${airDateValue}`, airData => {
@@ -34,25 +49,10 @@ function runAir() {
         SO2.forEach(d => {SO2Arr.push([d.latitude, d.longitude, d.observation_count])});
 
         //Create initial heatmap layers
-        let COLayer = L.heatLayer(COArr, {radius:50, blur:30});
-        let O3Layer = L.heatLayer(O3Arr, {radius:50, blur:30});
-        let NO2Layer = L.heatLayer(NO2Arr, {radius:50, blur:30});
-        let SO2Layer = L.heatLayer(SO2Arr, {radius:50, blur:30});
-
-        //Set base layer for the map
-        let baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-            attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-            maxZoom: 18,
-            id: "streets-v11",
-            accessToken: API_KEY
-            });
-        
-        //Create Map
-        let myMap = L.map("weather-heatmap", {
-            center: [39.50, -98.35],
-            zoom: 4,
-            layers: [baseLayer, SO2Layer]
-        });
+        let COLayer = L.heatLayer(COArr, {radius:50, blur:30}).addTo(myMap);
+        let O3Layer = L.heatLayer(O3Arr, {radius:50, blur:30}).addTo(myMap);
+        let NO2Layer = L.heatLayer(NO2Arr, {radius:50, blur:30}).addTo(myMap);
+        let SO2Layer = L.heatLayer(SO2Arr, {radius:50, blur:30}).addTo(myMap);
 
         //Set Overlay Layers
         let overlayMaps = {
@@ -62,11 +62,34 @@ function runAir() {
             "Nitrogen Dioxide (ppb)": NO2Layer,
         };
 
+        function renderAir() {
+            //Grab date value
+            airDateValue = airDate.property("value");
+            //Reset arrays
+            COArr = [];
+            O3Arr = [];
+            NO2Arr = [];
+            SO2Arr = [];
+            //Repush data
+            CO.forEach(d => {COArr.push([d.latitude, d.longitude, d.observation_count])});
+            O3.forEach(d => {O3Arr.push([d.latitude, d.longitude, d.observation_count])});
+            NO2.forEach(d => {NO2Arr.push([d.latitude, d.longitude, d.observation_count])});
+            SO2.forEach(d => {SO2Arr.push([d.latitude, d.longitude, d.observation_count])});
+            //Reset layers
+            COLayer.setLatLngs(COArr);
+            O3Layer.setLatLngs(O3Arr);
+            NO2Layer.setLatLngs(NO2Arr);
+            SO2Layer.setLatLngs(SO2Layer);
+        }
+
         //Create Layer control
         L.control.layers(overlayMaps).addTo(myMap);
 
         //Add legend to map
         legendAir.addTo(myMap);
+
+        //Event handler to update heatmap
+        airDate.on("change.air", renderAir);
     });
 }
 //Create legend for the map
@@ -91,4 +114,3 @@ legendAir.onAdd = function (map) {
 
 //Event handler to run code
 airDateType.on("change.air", runAir);
-airDate.on("change.air", runAir);

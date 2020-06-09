@@ -1,5 +1,6 @@
 appdirs==1.4.4
 beautifulsoup4==4.9.1
+boto==2.49.0
 bs4==0.0.1
 certifi==2020.4.5.1
 chardet==3.0.4

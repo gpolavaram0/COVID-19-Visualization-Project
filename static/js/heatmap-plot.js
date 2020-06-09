@@ -9,7 +9,7 @@ const formatTime = d3.timeFormat("%Y-%m-%d");
 //Function to run code
 function runInfection() {
     //Read in infection & death data
-    d3.json(`https://covid19bootcampproject3.herokuapp.com/county_clean/${infectionData}`, infectionData => {
+    d3.json(`https://covid19bootcampproject3.herokuapp.com/county_clean/${infectionDateValue}`, infectionData => {
         //Parse through data
         infectionData.forEach(d => {
             d.date = formatTime(d.date);

@@ -82,7 +82,7 @@ db = SQLAlchemy(app)
 def database_csv_retriever(csv_name, *args):
     csv_name_db = db.Table(csv_name, db.metadata, autoload = True, autoload_with = db.engine)
     csv_query = db.session.query(csv_name_db).all()
-    # print(csv_query)
+    
     csv_date_df = pd.DataFrame(csv_query, columns = args)
     csv_date_df = csv_date_df.reset_index(drop=True)
     csv_date_df['date_local'] = csv_date_df['date_local'].astype(str)
@@ -92,7 +92,20 @@ def database_csv_retriever(csv_name, *args):
 
     return csv_lod
 
+########################################################
 
+# csv_name_db = db.Table('infection_date', db.metadata, autoload = True, autoload_with = db.engine)
+# csv_query = db.session.query(csv_name_db).filter(csv_name_db.c.date_local == "2020-01-22").all()
+# print(csv_query)
+# csv_date_df = pd.DataFrame(csv_query, columns = ['date_local','cases','deaths'])
+# csv_date_df = csv_date_df.reset_index(drop=True)
+# csv_date_df['date_local'] = csv_date_df['date_local'].astype(str)
+# csv_date_df2 = csv_date_df.loc[csv_date_df['date_local'] == '2020-01-22', ['date_local','cases','deaths']]
+# print(csv_date_df2)
+
+
+
+##########################################################
 # database_csv_retriever("infection_date",'date','cases','deaths')
 
 # csv_name_db = db.Table("air_line", db.metadata, autoload = True, autoload_with = db.engine)
@@ -137,25 +150,50 @@ def test():
     print(x)
     return jsonify(x)
 
-@app.route("/air_quality")
-def air_quality():
-    air_quality_lod = database_csv_retriever("air_quality","index","latitude","longitude","parameter","pollutant_standard","date_local","units_of_measure","observation_count","observation_percent","state","county","city")
+@app.route("/air_quality/<air_quality_single_date>")
+def air_quality(air_quality_single_date):
+    # air_quality_lod = database_csv_retriever("air_quality","index","latitude","longitude","parameter","pollutant_standard","date_local","units_of_measure","observation_count","observation_percent","state","county","city")
+    
+    air_quality_name_db = db.Table('air_quality', db.metadata, autoload = True, autoload_with = db.engine)
+    air_quality_query = db.session.query(air_quality_name_db).filter(air_quality_name_db.c.date_local == air_quality_single_date).all()
+    air_quality_date_df = pd.DataFrame(air_quality_query, columns = ["index","latitude","longitude","parameter","pollutant_standard","date_local","units_of_measure","observation_count","observation_percent","state","county","city"])
+    air_quality_date_df = air_quality_date_df.reset_index(drop=True)
+    air_quality_date_df['date_local'] = air_quality_date_df['date_local'].astype(str)
+    air_quality_lod = air_quality_date_df.to_dict('records')
+    
     return jsonify(air_quality_lod)
 
 
-@app.route("/county_clean")
-def county_clean():
-    county_clean_lod = database_csv_retriever("county_clean","index","county","state","lat","long","date_local","cases","deaths")
+@app.route("/county_clean/<county_clean_single_date>")
+def county_clean(county_clean_single_date):
+    # county_clean_lod = database_csv_retriever("county_clean","index","county","state","lat","long","date_local","cases","deaths")
+
+    county_clean_name_db = db.Table('county_clean', db.metadata, autoload = True, autoload_with = db.engine)
+    county_clean_query = db.session.query(county_clean_name_db).filter(county_clean_name_db.c.date_local == county_clean_single_date).all()
+    county_clean_date_df = pd.DataFrame(county_clean_query, columns = ["index","county","state","lat","long","date_local","cases","deaths"])
+    county_clean_date_df = county_clean_date_df.reset_index(drop=True)
+    county_clean_date_df['date_local'] = county_clean_date_df['date_local'].astype(str)
+    county_clean_lod = county_clean_date_df.to_dict('records')
+
     return jsonify(county_clean_lod)
 
 @app.route("/infection_date")
 def infection_date():
     infection_date_lod = database_csv_retriever("infection_date",'date_local','cases','deaths')
+
+    # infection_date_name_db = db.Table('infection_date', db.metadata, autoload = True, autoload_with = db.engine)
+    # infection_date_query = db.session.query(infection_date_name_db).filter(infection_date_name_db.c.date_local == infection_date_single_date).all()
+    # infection_date_date_df = pd.DataFrame(infection_date_query, columns = ['date_local','cases','deaths'])
+    # infection_date_date_df = infection_date_date_df.reset_index(drop=True)
+    # infection_date_date_df['date_local'] = infection_date_date_df['date_local'].astype(str)
+    # infection_date_date_lod = infection_date_date_df.to_dict('records')
+    
+    
     return jsonify(infection_date_lod)
+    # return jsonify(infection_date_date_lod)
 
 @app.route("/air_line")
 def air_line():
-
 
     air_line_lod = database_csv_retriever("air_line","date_local","parameter","observation_count")
     return jsonify(air_line_lod)

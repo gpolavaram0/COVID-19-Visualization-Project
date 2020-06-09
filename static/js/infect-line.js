@@ -6,17 +6,17 @@ const iLineEnd = d3.select("#end-date");
 function runiLine() {
     //Read in data
     d3.json("https://covid19bootcampproject3.herokuapp.com/infection_date", infectionData => {
-//         Parse through the data
-//         infectionData.forEach(d => {
-//             d.date = formatTime(d.date);
-// //             d.cases = +d.cases;
-//             d.deaths = +d.deaths;
-//         });
+        //Parse through the data
+        infectionData.forEach(d => {
+            d.date = formatTime(d.date);
+            d.cases = +d.cases;
+            d.deaths = +d.deaths;
+        });
 
         //Set initial traces
         let traceInfection = {
             type: "scatter",
-            x: infectionData.map(d => d.date_local),
+            x: infectionData.map(d => d.date),
             y: infectionData.map(d => d.cases),
             mode: "lines",
             name: "Infections",
@@ -27,7 +27,7 @@ function runiLine() {
         };
         let traceDeath = {
             type: "scatter",
-            x: infectionData.map(d => d.date_local),
+            x: infectionData.map(d => d.date),
             y: infectionData.map(d => d.deaths),
             mode: "lines",
             name: "Deaths",
@@ -51,10 +51,10 @@ function runiLine() {
             const startDate = iLineStart.property("value");
             const endDate = iLineEnd.property("value");
             //Filter data
-            const dataFiltered = infectionData.filter(d => d.date_local >= startDate && d.date_local <= endDate);
+            const dataFiltered = infectionData.filter(d => d.date >= startDate && d.date <= endDate);
             //Reset x values
-            const ix = dataFiltered.map(d => d.date_local);
-            const dx = dataFiltered.map(d => d.date_local);
+            const ix = dataFiltered.map(d => d.date);
+            const dx = dataFiltered.map(d => d.date);
             //Reset y values
             const iy = dataFiltered.map(d => d.cases);
             const dy = dataFiltered.map(d => d.deaths);

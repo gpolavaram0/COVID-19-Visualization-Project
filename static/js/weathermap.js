@@ -6,7 +6,8 @@ const airDateValue = airDate.property("value");
 //Function to run code
 function runAir() {
     //Read in csv data
-    d3.json(`https://covid19bootcampproject3.herokuapp.com/air_quality/${airDateValue}`, airData => {
+//     d3.json(`https://covid19bootcampproject3.herokuapp.com/air_quality/${airDateValue}`, airData => {
+    d3.json(`https://covid19bootcampproject3.herokuapp.com/air_quality/2020-01-24`, airData => {    
         //Parse through data
         airData.forEach(d => {
 //             d.date_local = formatTime(d.date_local);

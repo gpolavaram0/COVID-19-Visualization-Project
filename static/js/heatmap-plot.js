@@ -12,7 +12,7 @@ function runInfection() {
     d3.json(`https://covid19bootcampproject3.herokuapp.com/county_clean/${infectionDateValue}`, infectionData => {
         //Parse through data
         infectionData.forEach(d => {
-            d.date = formatTime(d.date);
+            d.date_local = formatTime(d.date_local);
             d.cases = +d.cases;
             d.deaths = +d.deaths;
         });

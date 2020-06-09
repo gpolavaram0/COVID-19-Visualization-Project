@@ -57,7 +57,7 @@ function runInfection() {
             //Grab input value
             const dateValue = dateSingle.property("value");
             //Refilter data
-            dataFiltered = infectionData.filter(d => d.date === dateValue);
+            dataFiltered = infectionData.filter(d => d.date_local === dateValue);
             
             //Reset data arrays for heatmap layers
             let infectionArr = [];

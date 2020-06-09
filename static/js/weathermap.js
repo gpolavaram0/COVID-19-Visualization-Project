@@ -10,13 +10,6 @@ const airbaseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/t
     accessToken: API_KEY
     });
 
-//Create Map
-const myMap = L.map("weather-heatmap", {
-    center: [39.50, -98.35],
-    zoom: 4,
-    layers: [baseLayer, SO2Layer]
-});
-
 //Create initial heatmap layers
 //Set array for each parameter
 let COArr = [];
@@ -35,6 +28,14 @@ const airoverlayMaps = {
     "Carbon Monoxide (ppm)": COLayer,
     "Nitrogen Dioxide (ppb)": NO2Layer,
 };
+
+//Create Map
+const myMap = L.map("weather-heatmap", {
+    center: [39.50, -98.35],
+    zoom: 4,
+    layers: [baseLayer, SO2Layer]
+});
+
 //Create Layer control
 L.control.layers(airoverlayMaps).addTo(myMap);
 
@@ -57,18 +58,12 @@ function runAir() {
         const NO2 = airData.filter(d => d.parameter === "Nitrogen dioxide (NO2)");
         const SO2 = airData.filter(d => d.parameter === "Sulfur dioxide");
 
-        //Add lat lngs to the arrays
-        CO.forEach(d => {COArr.push([d.latitude, d.longitude, d.observation_count])});
-        O3.forEach(d => {O3Arr.push([d.latitude, d.longitude, d.observation_count])});
-        NO2.forEach(d => {NO2Arr.push([d.latitude, d.longitude, d.observation_count])});
-        SO2.forEach(d => {SO2Arr.push([d.latitude, d.longitude, d.observation_count])});
-
         //Reset arrays
         COArr = [];
         O3Arr = [];
         NO2Arr = [];
         SO2Arr = [];
-        //Repush data
+        //Add lat lngs to the arrays
         CO.forEach(d => {COArr.push([d.latitude, d.longitude, d.observation_count])});
         O3.forEach(d => {O3Arr.push([d.latitude, d.longitude, d.observation_count])});
         NO2.forEach(d => {NO2Arr.push([d.latitude, d.longitude, d.observation_count])});
@@ -80,6 +75,7 @@ function runAir() {
         SO2Layer.setLatLngs(SO2Layer);
     });
 }
+
 //Create legend for the map
 const legendAir = L.control({position: "bottomleft"});
 //Function to add legend to map

@@ -17,6 +17,12 @@ function runInfection() {
         //Create data arrays for heatmap layers
         let infectionArr = [];
         let deathArr = [];
+        //Add lat lngs to the arrays
+        infectionData.forEach(d => {
+            infectionArr.push([d.lat, d.long, d.cases]);
+             deathArr.push([d.lat, d.long, d.deaths]);
+            }
+        );
 
         //Create Heatmap layers
         let infectionLayer = L.heatLayer(infectionArr);
@@ -31,7 +37,7 @@ function runInfection() {
             });
 
         //create map
-        let myMap = L.map("infection-heatmap", {
+        let Map = L.map("infection-heatmap", {
             center: [39.50, -98.35],
             zoom: 4,
             layers: [baseLayer, infectionLayer]
@@ -44,10 +50,10 @@ function runInfection() {
         };
 
         //Create Layer control
-        L.control.layers(overlayMaps).addTo(myMap);
+        L.control.layers(overlayMaps).addTo(Map);
 
         //Add legend to map
-        legend.addTo(myMap);
+        legend.addTo(Map);
     });
 }
 
@@ -72,5 +78,5 @@ legend.onAdd = function (map) {
 }   
 
 //Event handler to begin running code
-infectionDateType.on("change", runInfection);
+infectionDateType.on("change.heat", runInfection);
 infectionDate.on("change.heat", runInfection);

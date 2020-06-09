@@ -4,8 +4,8 @@ const infectionDateType = d3.select("#date-type");
 const infectionDateValue = infectionDate.property("value");
 
 //Date parser
-const parseTime = d3.timeParse("%a, %d %b %Y %H:%M:%S");
-const formatTime = d3.timeFormat("%Y-%m-%d");
+// const parseTime = d3.timeParse("%a, %d %b %Y %H:%M:%S");
+// const formatTime = d3.timeFormat("%Y-%m-%d");
 //Function to run code
 function runInfection() {
     //Read in infection & death data

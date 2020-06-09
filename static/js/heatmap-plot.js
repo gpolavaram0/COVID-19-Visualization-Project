@@ -40,8 +40,8 @@ function runInfection() {
         );
 
         //Create Heatmap layers
-        let infectionLayer = L.heatLayer(infectionArr).addTo(Map);
-        let deathLayer = L.heatLayer(deathArr).addTo(Map);
+        let infectionLayer = L.heatLayer(infectionArr);
+        let deathLayer = L.heatLayer(deathArr);
 
         //Set Overlay Layers
         let overlayMaps = {

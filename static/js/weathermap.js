@@ -3,7 +3,7 @@ const airDate = d3.select("#date-input");
 const airDateType = d3.select("#date-type");
 
 //Set base layer for the map
-const baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+const airbaseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
     id: "streets-v11",
@@ -14,7 +14,7 @@ const baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tile
 const myMap = L.map("weather-heatmap", {
     center: [39.50, -98.35],
     zoom: 4,
-    layers: [baseLayer]
+    layers: [airbaseLayer]
 });
 
 //Function to run code
@@ -49,10 +49,10 @@ function runAir() {
         SO2.forEach(d => {SO2Arr.push([d.latitude, d.longitude, d.observation_count])});
 
         //Create initial heatmap layers
-        let COLayer = L.heatLayer(COArr, {radius:50, blur:30}).addTo(myMap);
-        let O3Layer = L.heatLayer(O3Arr, {radius:50, blur:30}).addTo(myMap);
-        let NO2Layer = L.heatLayer(NO2Arr, {radius:50, blur:30}).addTo(myMap);
-        let SO2Layer = L.heatLayer(SO2Arr, {radius:50, blur:30}).addTo(myMap);
+        let COLayer = L.heatLayer(COArr, {radius:50, blur:30});
+        let O3Layer = L.heatLayer(O3Arr, {radius:50, blur:30});
+        let NO2Layer = L.heatLayer(NO2Arr, {radius:50, blur:30});
+        let SO2Layer = L.heatLayer(SO2Arr, {radius:50, blur:30});
 
         //Set Overlay Layers
         let overlayMaps = {

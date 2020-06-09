@@ -43,15 +43,22 @@ function runInfection() {
         let infectionLayer = L.heatLayer(infectionArr);
         let deathLayer = L.heatLayer(deathArr);
 
+        //Add default layer to map object
+        Map.layers.push(infectionLayer);
+
         //Set Overlay Layers
         let overlayMaps = {
             Infections: infectionLayer,
             Deaths: deathLayer
         };
 
+        //Create Layer control
+        L.control.layers(overlayMaps).addTo(Map);
+
         function renderInfection() {
             //Grab date value
             infectionDateValue = infectionDate.property("value");
+            console.log(infectionDateValue);
             //Reset arrays
             infectionArr = [];
             deathArr = [];
@@ -65,9 +72,6 @@ function runInfection() {
             infectionLayer.setLatLngs(infectionArr);
             deathLayer.setLatLngs(deathArr);
         }
-
-        //Create Layer control
-        L.control.layers(overlayMaps).addTo(Map);
 
         //Add legend to map
         legend.addTo(Map);

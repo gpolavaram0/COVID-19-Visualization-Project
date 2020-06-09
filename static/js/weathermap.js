@@ -54,6 +54,9 @@ function runAir() {
         let NO2Layer = L.heatLayer(NO2Arr, {radius:50, blur:30});
         let SO2Layer = L.heatLayer(SO2Arr, {radius:50, blur:30});
 
+        //Set default layer
+        myMap.layers.push(SO2Layer);
+
         //Set Overlay Layers
         let overlayMaps = {
             "Sulfur Dioxide (ppb)": SO2Layer,
@@ -65,6 +68,7 @@ function runAir() {
         function renderAir() {
             //Grab date value
             airDateValue = airDate.property("value");
+            console.log(airDateValue);
             //Reset arrays
             COArr = [];
             O3Arr = [];

@@ -2,7 +2,7 @@
 let geojson;
 
 //Create map
-const myMap = L.map("popDen-choro", {
+const popMap = L.map("popDen-choro", {
     center: [39.50, -98.35],
     zoom: 4,
 });
@@ -13,7 +13,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     tileSize: 512,
     zoomOffset: -1,
     accessToken: API_KEY
-}).addTo(myMap);
+}).addTo(popMap);
 
 //Function to get color for heatmap
 function getColor(d) {
@@ -64,7 +64,7 @@ function resetHighlight(e) {
 
 //Function to zoom to feature
 function zoomToFeature(e) {
-    myMap.fitBounds(e.target.getBounds());
+    popMap.fitBounds(e.target.getBounds());
 }
 
 function onEachFeature(feature, layer) {
@@ -78,7 +78,7 @@ function onEachFeature(feature, layer) {
 geojson = L.geoJson(statesData, {
     style: style,
     onEachFeature: onEachFeature
-}).addTo(myMap);
+}).addTo(popMap);
 
 //Set the control layer
 const info = L.control();
@@ -95,4 +95,4 @@ info.update = function (props) {
         : 'Hover over a state');
 };
 //Add popups to map
-info.addTo(myMap);
+info.addTo(popMap);

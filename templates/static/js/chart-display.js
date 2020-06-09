@@ -162,7 +162,7 @@ function renderChart() {
                 for (i = 0; i < popDenClass.length; i++) {
                     popDenClass[i].style.display = "inline-block";
                 }
-                dateType.select("input").property("disabled", false);
+                dateType.property("disabled", false);
                 dateStart.select("input").property("disabled", false);
                 dateEnd.select("input").property("disabled", false);
                 dateSingle.select("input").property("disabled", false);

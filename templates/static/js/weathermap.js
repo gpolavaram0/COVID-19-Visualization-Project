@@ -1,13 +1,19 @@
-//Set date input to a variable
+//Set date inputs as variables
 const airDate = d3.select("#date-input");
 const airDateType = d3.select("#date-type");
 
 //Function to run code
 function runAir() {
+    //Set date value to a variable
+    const airDateValue = airDate.property("value");
+
     //Read in csv data
-    d3.json("https://covid19bootcampproject3.herokuapp.com/air_quality", airData => {
+    d3.json(`https://covid19bootcampproject3.herokuapp.com/air_quality/${airDateValue}`, airData => {
+
         //Parse through data
-        airData.forEach(d => d.observation_count = +d.observation_count);
+        airData.forEach(d => {
+            d.observation_count = +d.observation_count
+        });
 
         //Set seperate objects for each parameter
         const CO = airData.filter(d => d.parameter === "Carbon monoxide");
@@ -28,7 +34,7 @@ function runAir() {
         let SO2Layer = L.heatLayer(SO2Arr, {radius:50, blur:30});
 
         //Set base layer for the map
-        const baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+        let baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
             attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
             maxZoom: 18,
             id: "streets-v11",
@@ -36,14 +42,14 @@ function runAir() {
             });
         
         //Create Map
-        const myMap = L.map("weather-heatmap", {
+        let myMap = L.map("weather-heatmap", {
             center: [39.50, -98.35],
             zoom: 4,
             layers: [baseLayer, SO2Layer]
         });
 
         //Set Overlay Layers
-        const overlayMaps = {
+        let overlayMaps = {
             "Sulfur Dioxide (ppb)": SO2Layer,
             "Ozone (ppm)": O3Layer,
             "Carbon Monoxide (ppm)": COLayer,
@@ -55,37 +61,6 @@ function runAir() {
 
         //Add legend to map
         legendAir.addTo(myMap);
-
-        //Function to redraw heatmap
-        function renderAir() {
-            //Grab input value
-            const dateValue = dateSingle.property("value");
-            //Refilter data
-            COFiltered = CO.filter(d => d.date_local === dateValue);
-            O3Filtered = O3.filter(d => d.date_local === dateValue);
-            NO2Filtered = NO2.filter(d => d.date_local === dateValue);
-            SO2Filtered = SO2.filter(d => d.date_local === dateValue);
-            
-            //Reset data arrays for heatmap layers
-            COArr = [];
-            O3Arr = [];
-            NO2Arr = [];
-            SO2Arr = [];
-            //Iterate through filtered data to append data arrays
-            COFiltered.forEach(d => COArr.push([d.latitude, d.longitude, d.observation_count]));
-            O3Filtered.forEach(d => O3Arr.push([d.latitude, d.longitude, d.obersvation_count]));
-            NO2Filtered.forEach(d => NO2Arr.push([d.latitude, d.longitude, d.observation_count]));
-            SO2Filtered.forEach(d => SO2Arr.push([d.latitude, d.longitude, d.observation_count]));
-            //Reset the layers and redraw
-            COLayer.setLatLngs(COArr);
-            O3Layer.setLatLngs(O3Arr);
-            NO2Layer.setLatLngs(NO2Arr);
-            SO2Layer.setLatLngs(SO2Arr);
-        }
-
-        renderAir();
-        //Event handler to change the chart on date input
-        airDate.on("change.air", renderAir);
     });
 }
 //Create legend for the map
@@ -110,3 +85,4 @@ legendAir.onAdd = function (map) {
 
 //Event handler to run code
 airDateType.on("change.air", runAir);
+airDate.on("change.air", runAir);

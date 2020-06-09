@@ -33,7 +33,7 @@ const airoverlayMaps = {
 const myMap = L.map("weather-heatmap", {
     center: [39.50, -98.35],
     zoom: 4,
-    layers: [baseLayer, SO2Layer]
+    layers: [airbaseLayer, SO2Layer]
 });
 
 //Create Layer control
@@ -99,6 +99,8 @@ legendAir.onAdd = function (map) {
 //Add legend to map
 legendAir.addTo(myMap);
 
+//Make initial chart
+runAir();
 //Event handler to run code
 airDateType.on("change.air", runAir);
 airDate.on("change.air", runAir);

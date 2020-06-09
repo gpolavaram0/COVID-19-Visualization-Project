@@ -1,11 +1,12 @@
 //Set date input to a variable
 const airDate = d3.select("#date-input");
 const airDateType = d3.select("#date-type");
+const airDateValue = airDate.property("value");
 
 //Function to run code
 function runAir() {
     //Read in csv data
-    d3.json("https://covid19bootcampproject3.herokuapp.com/air_quality", airData => {
+    d3.json(`https://covid19bootcampproject3.herokuapp.com/air_quality/${airDateValue}`, airData => {
         //Parse through data
         airData.forEach(d => {
             d.date_local = formatTime(d.date_local);

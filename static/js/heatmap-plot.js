@@ -1,16 +1,18 @@
 //Set date input to variable
 const infectionDate = d3.select("#date-input");
 const infectionDateType = d3.select("#date-type");
+const infectionDateValue = infectionDate.property("value");
+
 //Date parser
-// const parseTime = d3.timeParse("%Y-%m-%d");
-// const formatTime = d3.timeFormat("%Y-%m-%d");
+const parseTime = d3.timeParse("%a, %d %b %Y %H:%M:%S");
+const formatTime = d3.timeFormat("%Y-%m-%d");
 //Function to run code
 function runInfection() {
     //Read in infection & death data
-    d3.json("https://covid19bootcampproject3.herokuapp.com/county_clean", infectionData => {
+    d3.json(`https://covid19bootcampproject3.herokuapp.com/county_clean/${infectionDateValue}`, infectionData => {
         //Parse through data
         infectionData.forEach(d => {
-            d.date_local = formatTime(d.date_local);
+            d.date = formatTime(d.date);
             d.cases = +d.cases;
             d.deaths = +d.deaths;
         });
@@ -55,7 +57,7 @@ function runInfection() {
             //Grab input value
             const dateValue = dateSingle.property("value");
             //Refilter data
-            dataFiltered = infectionData.filter(d => d.date_local === dateValue);
+            dataFiltered = infectionData.filter(d => d.date === dateValue);
             
             //Reset data arrays for heatmap layers
             let infectionArr = [];

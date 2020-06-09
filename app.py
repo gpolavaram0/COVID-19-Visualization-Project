@@ -48,8 +48,8 @@ tickers = pd.DataFrame({
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hdjdaacogqimcu:a6007ea2abde788e2b86e856357cb8741377410b135800ea087bd2780f50e2fb@ec2-52-44-55-63.compute-1.amazonaws.com:5432/dbh8e6jsnrlr1k'
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:Eagle2fox1!project2@project2db.cvkw7pcnugqv.us-east-2.rds.amazonaws.com:5432/project2db'
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:Eagle2fox1!project2@project2db.cvkw7pcnugqv.us-east-2.rds.amazonaws.com:5432/project2db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 
 
 # engine = create_engine('postgresql://scott:tiger@localhost/mydatabase')

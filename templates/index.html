@@ -5,6 +5,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>The COVID-19 Affect</title>
+        <!--Billboard CSS-->
+        <link rel="stylesheet" href="static/css/billboard.min.css">
         <!--Bootstrap CSS-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="static/css/style.css">
@@ -22,6 +24,8 @@
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <!--PopDen data-->
         <script type="text/javascript" src="static/js/us-states_popDen.js"></script>
+        <!--Billboard JS-->
+        <script type="text/javascript" src="static/js/billboard.min.js"></script>
         <!--Config file for API calling-->
         <script type="text/javascript" src="static/js/config.js"></script>
     </head>
@@ -79,7 +83,7 @@
             <div class="stock">
                 <h1>Stock Comparison</h1>
                 <hr>
-                <p></p>
+                <p>Explore how the growing pandemic affected the stock prices of several large companies in different sectors. Sectors provided are Retail, Technology, Entertainment, Communications, and Airlines. The way disaster changes economy can be unexpected and lasting. Data shown is gathered for January 22, 2020 to May 25, 2020.</p>
             </div>
             <div class="weather">
                 <h1>Air Quality Comparison</h1>
@@ -106,7 +110,12 @@
         <!--Links to data sources-->
         <div class="information" id="reference">
             <div class="stock">
-
+                <h1>Visualizations Powered by Data from:</h1>
+                <hr>
+                <ul>
+                    <li><span>COVID-19 Cases and Death Data:</span> <a href="https://www.kaggle.com/fireballbyedimyrnmom/us-counties-covid-19-dataset" target="_blank">Kaggle CSV</a> of New York Times Publshed Data</li>
+                    <li><span>Stock Data: <a href="https://github.com/lukaszbanasiak/yahoo-finance" target="_blank">Yahoo-Finance</a></span> python library</li>
+                </ul>
             </div>
             <div class="weather">
                 <h1>Visualizations Powered by Data from:</h1>
@@ -135,6 +144,8 @@
         <script src="static/js/weathermap.js"></script>
         <!--JS for Air quality line graph-->
         <script src="static/js/air-line.js"></script>
+        <!--JS for Stock graphs-->
+        <script src="static/js/stocks.js"></script>
         <!--JS for Population Density Choropleth-->
         <script src="static/js/popDen-plot.js"></script>
         <!--JS for changing Display-->

@@ -21,8 +21,6 @@ let overlayMaps = {
     Infections: infectionLayer,
     Deaths: deathLayer
 };
-//Create Layer control
-L.control.layers(overlayMaps).addTo(Map);
 
 //create map
 const Map = L.map("infection-heatmap", {
@@ -30,6 +28,9 @@ const Map = L.map("infection-heatmap", {
     zoom: 4,
     layers: [baseLayer, infectionLayer]
 });
+
+//Create Layer control
+L.control.layers(overlayMaps).addTo(Map);
 
 //Function to run code
 function runInfection() {

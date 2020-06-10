@@ -1,3 +1,5 @@
+//Function to run data
+function runStock();
 //Call in data
 d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
     var comps = ['WMT', 'TGT', 'NVDA', 'ZM', 'SPOT', 'NFLX', 'AMZN', 'SHOP', 'DAL', 'UAL'];
@@ -38,13 +40,6 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
     var dates = stock_data.map(d => d["date_local"]);
     dates.unshift('date');
 
-    //Funtion to draw charts when ready
-    function renderStock() {
-        if(d3.select("#Techchart").style.display !== "none" &&
-        d3.select("#Enterchart").style.display !== "none" &&
-        d3.select("#Comchart").style.display !== "none" &&
-        d3.select("#Airlinechart").style.display !== "none" &&
-        d3.select("#Retailchart").style.display !== "none") {
             /* Retail Chart */
             var chart = bb.generate({
                 title: {
@@ -246,11 +241,4 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                 },
             },
             });
-        }
-        else {
-            setTimeout(renderStock, 300);
-        }
-    }
-
-    renderStock();
 });

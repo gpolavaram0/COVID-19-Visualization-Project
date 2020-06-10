@@ -100,9 +100,10 @@ function renderChart() {
                 dateEnd.select("input").property("value", "2020-05-25");
                 dateStart.select("input").property("disabled", true);
                 dateEnd.select("input").property("disabled", true);
+                runStock(); 
                 const stockType = stockSelector.property("value");
                 function stockSwitch() {
-                    if (d3.select("#Retailchart").innerHTML  !== "" && d3.select("#Techchart").innerHTML !== "" && d3.select("#Enterchart").innerHTML !== "" && d3.select("#Comchart").innerHTML !== "" && d3.select("#Airlinechart").innerHTML !== "") { 
+                    if (d3.select("#Retailchart").innerHTML  !== "" && d3.select("#Techchart").innerHTML !== "" && d3.select("#Enterchart").innerHTML !== "" && d3.select("#Comchart").innerHTML !== "" && d3.select("#Airlinechart").innerHTML !== "") {
                         switch (stockType) {
                             case 'Retail':
                                 {

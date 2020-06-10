@@ -13,6 +13,8 @@ import get_data
 
 import psycopg2
 
+from boto.s3.connection import S3Connection
+# s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
 #################################################
 # Database Setup
 #################################################
@@ -49,7 +51,6 @@ tickers = pd.DataFrame({
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hdjdaacogqimcu:a6007ea2abde788e2b86e856357cb8741377410b135800ea087bd2780f50e2fb@ec2-52-44-55-63.compute-1.amazonaws.com:5432/dbh8e6jsnrlr1k'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:Eagle2fox1!project2@project2db.cvkw7pcnugqv.us-east-2.rds.amazonaws.com:5432/project2db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 
 
 # engine = create_engine('postgresql://scott:tiger@localhost/mydatabase')
@@ -104,7 +105,8 @@ def database_csv_retriever(csv_name, *args):
 # csv_date_df2 = csv_date_df.loc[csv_date_df['date_local'] == '2020-01-22', ['date_local','cases','deaths']]
 # print(csv_date_df2)
 
-
+# stock_data = get_data.main()
+# print(stock_data)
 
 ##########################################################
 # database_csv_retriever("infection_date",'date','cases','deaths')
@@ -204,8 +206,8 @@ def stocks():
 
     stock_data = get_data.main()
 
-    return render_template('index2.html', stock_data = stock_data)
-
+    # return render_template('index2.html', stock_data = stock_data)
+    return jsonify(stock_data)
 
 if __name__ == '__main__':
     app.run(debug=True)

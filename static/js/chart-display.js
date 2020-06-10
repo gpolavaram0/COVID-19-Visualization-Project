@@ -49,33 +49,6 @@ function renderChart() {
                 dateEnd.select("input").attr("max", "2020-05-25");
                 dateEnd.select("input").property("disabled", false);
                 dateType.property("disabled", false);;
-                switch (dateTypeValue) {
-                    case 'Date Range':
-                        {
-                            dateSingle.style("display", "none")
-                            dateStart.style("display", "");
-                            dateEnd.style("display", "")
-                            d3.select("#infection-heatmap").style("display", "none");
-                            d3.select("#weather-heatmap").style("display", "none");
-                            d3.select("#infection-line").style("display", "inline-block");
-                            d3.select("#weather-line").style("display", "inline-block");
-                            runiLine();
-                            break;
-                        }
-                    case 'Single Date':
-                        {
-                            dateStart.style("display", "none");
-                            dateEnd.style("display", "none");
-                            dateSingle.style("display", "inline-block");
-                            d3.select("#infection-line").style("display", "none");
-                            d3.select("#weather-line").style("display", "none");
-                            d3.select("#infection-heatmap").style("display", "inline-block");
-                            d3.select("#weather-heatmap").style("display", "inline-block");
-                            runInfection();
-                            runAir();
-                            break;
-                        }
-                }
                 break;
           }
         case 'Stock Lookup':

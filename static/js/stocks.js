@@ -1,5 +1,3 @@
-//Function to run data
-function runStock() {
 //Call in data
 d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
     var comps = ['WMT', 'TGT', 'NVDA', 'ZM', 'SPOT', 'NFLX', 'AMZN', 'SHOP', 'DAL', 'UAL'];
@@ -242,4 +240,3 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
             },
             });
 });
-}

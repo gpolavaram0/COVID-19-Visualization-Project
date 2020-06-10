@@ -106,7 +106,13 @@ def database_csv_retriever(csv_name, *args):
 # print(csv_date_df2)
 
 # stock_data = get_data.main()
-# print(stock_data)
+# stock_data_df = pd.DataFrame(stock_data)
+# stock_data_df.drop(index = 0, inplace = True)
+# stock_data_df['date'] = stock_data_df['date'].astype(str)
+# stock_data_df=stock_data_df.rename(columns = {'date':'date_local'})
+# print(stock_data_df)
+# stock_data_lod = stock_data_df.to_dict('records')
+# print(stock_data_lod)
 
 ##########################################################
 # database_csv_retriever("infection_date",'date','cases','deaths')
@@ -205,9 +211,15 @@ def air_line():
 def stocks():
 
     stock_data = get_data.main()
-
+    stock_data_df = pd.DataFrame(stock_data)
+    stock_data_df.drop(index = 0, inplace = True)
+    stock_data_df['date'] = stock_data_df['date'].astype(str)
+    stock_data_df=stock_data_df.rename(columns = {'date':'date_local'})
+    print(stock_data_df)
+    stock_data_lod = stock_data_df.to_dict('records')
+    
     # return render_template('index2.html', stock_data = stock_data)
-    return jsonify(stock_data)
+    return jsonify(stock_data_lod)
 
 if __name__ == '__main__':
     app.run(debug=True)

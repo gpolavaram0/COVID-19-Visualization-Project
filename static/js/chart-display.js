@@ -73,63 +73,7 @@ function renderChart() {
                 dateEnd.select("input").property("value", "2020-05-25");
                 dateStart.select("input").property("disabled", true);
                 dateEnd.select("input").property("disabled", true);
-                runStock(); 
-                const stockType = stockSelector.property("value");
-                function stockSwitch() {
-                    if (d3.select("#Retailchart").innerHTML  !== "" && d3.select("#Techchart").innerHTML !== "" && d3.select("#Enterchart").innerHTML !== "" && d3.select("#Comchart").innerHTML !== "" && d3.select("#Airlinechart").innerHTML !== "") {
-                        switch (stockType) {
-                            case 'Retail':
-                                {
-                                    d3.select("#Techchart").style("display", "none");
-                                    d3.select("#Enterchart").style("display", "none");
-                                    d3.select("#Comchart").style("display", "none");
-                                    d3.select("#Airlinechart").style("display", "none");
-                                    d3.select("#Retailchart").style("display", "inline-block");
-                                    break;
-                                }
-                            case 'Tech':
-                                {
-                                    d3.select("#Techchart").style("display", "inline-block");
-                                    d3.select("#Enterchart").style("display", "none");
-                                    d3.select("#Comchart").style("display", "none");
-                                    d3.select("#Airlinechart").style("display", "none");
-                                    d3.select("#Retailchart").style("display", "none");
-                                    break;
-                                }
-                            case 'Entertainment':
-                                {
-                                    d3.select("#Techchart").style("display", "none");
-                                    d3.select("#Enterchart").style("display", "inline-block");
-                                    d3.select("#Comchart").style("display", "none");
-                                    d3.select("#Airlinechart").style("display", "none");
-                                    d3.select("#Retailchart").style("display", "none");
-                                    break;
-                                }
-                            case 'Communications':
-                                {
-                                    d3.select("#Techchart").style("display", "none");
-                                    d3.select("#Enterchart").style("display", "none");
-                                    d3.select("#Comchart").style("display", "inline-block");
-                                    d3.select("#Airlinechart").style("display", "none");
-                                    d3.select("#Retailchart").style("display", "none");
-                                    break;
-                                }
-                            case 'Airlines':
-                                {
-                                    d3.select("#Techchart").style("display", "none");
-                                    d3.select("#Enterchart").style("display", "none");
-                                    d3.select("#Comchart").style("display", "none");
-                                    d3.select("#Airlinechart").style("display", "inline-block");
-                                    d3.select("#Retailchart").style("display", "none");
-                                    break;
-                                }
-                                }
-                        }
-                    else {
-                        setTimeout(stockSwitch, 300);
-                    }
-                }
-                stockSwitch();  
+                runStock();
                 runiLine();
                 break;
             }

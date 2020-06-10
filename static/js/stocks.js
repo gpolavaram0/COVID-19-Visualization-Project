@@ -266,7 +266,8 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                 }
         }
     
-    //Event handler for changing chart
-    stockInput.on("change.stock", renderStock);
     }
+    renderStock();
+    //Event handler for changing chart
+       stockInput.on("change.stock", renderStock);
 });

@@ -1,6 +1,3 @@
-//Chart selector
-const stockInput = d3.select("#stock-selector");
-
 //Call in data
 d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
     var comps = ['WMT', 'TGT', 'NVDA', 'ZM', 'SPOT', 'NFLX', 'AMZN', 'SHOP', 'DAL', 'UAL'];
@@ -40,206 +37,220 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
 
     var dates = stock_data.map(d => d["date_local"]);
     dates.unshift('date');
-    
-                    /* Retail Chart */
-                    var chart = bb.generate({
-                        title: {
-                            text: "Retail Market - Walmart (WMT) vs Target (TGT)"
-                        },
 
-                    bindto: "#Retailchart",
-                    data: {
-                        x: "date",
-                        columns: [
-                            dates,
-                            comp1_data, comp2_data
-                        ],
-                        types: {
-                            "WMT": "area-line-range",
-                            "TGT": "area-line-range",
-                        },
-                        colors: {
-                            "WMT": "red",
-                            "TGT": "green",
-                        },
+    //Funtion to draw charts when ready
+    function renderStock() {
+        if(d3.select("#Techchart").style.display !== "none" &&
+        d3.select("#Enterchart").style.display !== "none" &&
+        d3.select("#Comchart").style.display !== "none" &&
+        d3.select("#Airlinechart").style.display !== "none" &&
+        d3.select("#Retailchart").style.display !== "none") {
+            /* Retail Chart */
+            var chart = bb.generate({
+                title: {
+                    text: "Retail Market - Walmart (WMT) vs Target (TGT)"
+                },
 
-                        axes: {
-                            "WMT": "y",
-                            "TGT": "y",
-                        }
-                        
-                    },
+            bindto: "#Retailchart",
+            data: {
+                x: "date",
+                columns: [
+                    dates,
+                    comp1_data, comp2_data
+                ],
+                types: {
+                    "WMT": "area-line-range",
+                    "TGT": "area-line-range",
+                },
+                colors: {
+                    "WMT": "red",
+                    "TGT": "green",
+                },
 
-                    axis: {
-                        x: {
-                        type: "timeseries",
-                        tick: {
-                            format: "%Y-%m-%d"
-                        }
-                        },
+                axes: {
+                    "WMT": "y",
+                    "TGT": "y",
+                }
+                
+            },
 
-                    },
+            axis: {
+                x: {
+                type: "timeseries",
+                tick: {
+                    format: "%Y-%m-%d"
+                }
+                },
+
+            },
 
 
-                    });
+            });
 
-                    /* Technology Chart */
-                    var chart = bb.generate({
-                        title: {
-                            text: "Technology Market - Nvidia (NVDA) vs Zoom (ZM)"
-                        },
+            /* Technology Chart */
+            var chart = bb.generate({
+                title: {
+                    text: "Technology Market - Nvidia (NVDA) vs Zoom (ZM)"
+                },
 
-                    bindto: "Techchart",
-                    data: {
-                        x: "date",
-                        columns: [
-                            dates,
-                            comp3_data, comp4_data 
-                        ],
-                        types: { 
-                            "NVDA": "area-line-range",
-                            "ZM": "area-line-range",
-                            
-                        },
-                        colors: {
-                            "NVDA": "red",
-                            "ZM": "green",
+            bindto: "Techchart",
+            data: {
+                x: "date",
+                columns: [
+                    dates,
+                    comp3_data, comp4_data 
+                ],
+                types: { 
+                    "NVDA": "area-line-range",
+                    "ZM": "area-line-range",
+                    
+                },
+                colors: {
+                    "NVDA": "red",
+                    "ZM": "green",
 
-                        },
+                },
 
-                        axes: {
-                            "NVDA": "y",
-                            "ZM": "y",
-                        }
-                    },
+                axes: {
+                    "NVDA": "y",
+                    "ZM": "y",
+                }
+            },
 
-                    axis: {
-                        x: {
-                        type: "timeseries",
-                        tick: {
-                            format: "%Y-%m-%d"
-                        }
-                        },
-                    },
-                    });
+            axis: {
+                x: {
+                type: "timeseries",
+                tick: {
+                    format: "%Y-%m-%d"
+                }
+                },
+            },
+            });
 
-                    /* Entertainment Chart */
-                    var chart = bb.generate({
-                        title: {
-                            text: "Entertainment Market - Spotify (SPOT) vs Netflix (NFLX)"
-                        },
+            /* Entertainment Chart */
+            var chart = bb.generate({
+                title: {
+                    text: "Entertainment Market - Spotify (SPOT) vs Netflix (NFLX)"
+                },
 
-                    bindto: "Enterchart",
-                    data: {
-                        x: "date",
-                        columns: [
-                            dates,
-                            comp5_data, comp6_data 
-                        ],
-                        types: {
-                            "SPOT": "area-line-range",
-                            "NFLX": "area-line-range",
-                            
-                        },
-                        colors: {
-                            "SPOT": "red",
-                            "NFLX": "green",
+            bindto: "Enterchart",
+            data: {
+                x: "date",
+                columns: [
+                    dates,
+                    comp5_data, comp6_data 
+                ],
+                types: {
+                    "SPOT": "area-line-range",
+                    "NFLX": "area-line-range",
+                    
+                },
+                colors: {
+                    "SPOT": "red",
+                    "NFLX": "green",
 
-                        },
+                },
 
-                        axes: {
-                            "SPOT": "y",
-                            "NFLX": "y",
-                        }
-                    },
+                axes: {
+                    "SPOT": "y",
+                    "NFLX": "y",
+                }
+            },
 
-                    axis: {
-                        x: {
-                        type: "timeseries",
-                        tick: {
-                            format: "%Y-%m-%d"
-                        }
-                        },
+            axis: {
+                x: {
+                type: "timeseries",
+                tick: {
+                    format: "%Y-%m-%d"
+                }
+                },
 
-                    },
-                    });
+            },
+            });
 
-                    /* eCommerce Chart */
-                    var chart = bb.generate({
-                        title: {
-                            text: "eCommerce Market - Amazon (AMZN) vs Shopify (SHOP)"
-                        },
+            /* eCommerce Chart */
+            var chart = bb.generate({
+                title: {
+                    text: "eCommerce Market - Amazon (AMZN) vs Shopify (SHOP)"
+                },
 
-                    bindto: "Comchart",
-                    data: {
-                        x: "date",
-                        columns: [
-                            dates,
-                            comp7_data, comp8_data 
-                        ],
-                        types: { 
-                            "AMZN": "area-line-range",
-                            "SHOP": "area-line-range",
-                            
-                        },
-                        colors: {
-                            "AMZN": "red",
-                            "SHOP": "green",
+            bindto: "Comchart",
+            data: {
+                x: "date",
+                columns: [
+                    dates,
+                    comp7_data, comp8_data 
+                ],
+                types: { 
+                    "AMZN": "area-line-range",
+                    "SHOP": "area-line-range",
+                    
+                },
+                colors: {
+                    "AMZN": "red",
+                    "SHOP": "green",
 
-                        },
+                },
 
-                        axes: {
-                            "AMZN": "y",
-                            "SHOP": "y",
-                        }
-                    },
+                axes: {
+                    "AMZN": "y",
+                    "SHOP": "y",
+                }
+            },
 
-                    axis: {
-                        x: {
-                        type: "timeseries",
-                        tick: {
-                            format: "%Y-%m-%d"
-                        }
-                        },
-                    },
-                    });
+            axis: {
+                x: {
+                type: "timeseries",
+                tick: {
+                    format: "%Y-%m-%d"
+                }
+                },
+            },
+            });
 
-                    /* Airline Chart */
-                    var chart = bb.generate({
-                        title: {
-                            text: "Airline Market - Delta (DAL) vs United (UAL)"
-                        },
-                    bindto: "Airlinechart",
-                    data: {
-                        x: "date",
-                        columns: [
-                            dates,
-                            comp9_data, comp10_data 
-                        ],
-                        types: { 
-                            "DAL": "area-line-range",
-                            "UAL": "area-line-range",
-                            
-                        },
-                        colors: {
-                            "DAL": "red",
-                            "UAL": "green",
+            /* Airline Chart */
+            var chart = bb.generate({
+                title: {
+                    text: "Airline Market - Delta (DAL) vs United (UAL)"
+                },
+            bindto: "Airlinechart",
+            data: {
+                x: "date",
+                columns: [
+                    dates,
+                    comp9_data, comp10_data 
+                ],
+                types: { 
+                    "DAL": "area-line-range",
+                    "UAL": "area-line-range",
+                    
+                },
+                colors: {
+                    "DAL": "red",
+                    "UAL": "green",
 
-                        },
+                },
 
-                        axes: {
-                            "DAL": "y",
-                            "UAL": "y",
-                        }
-                    },
+                axes: {
+                    "DAL": "y",
+                    "UAL": "y",
+                }
+            },
 
-                    axis: {
-                        x: {
-                        type: "timeseries",
-                        tick: {
-                            format: "%Y-%m-%d"
-                        }
-                        },
-                    },
-                    });
+            axis: {
+                x: {
+                type: "timeseries",
+                tick: {
+                    format: "%Y-%m-%d"
+                }
+                },
+            },
+            });
+        }
+        else {
+            setTimeout(renderStock, 300);
+        }
+    }
+
+    renderStock();
 });

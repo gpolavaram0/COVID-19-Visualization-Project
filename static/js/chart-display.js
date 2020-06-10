@@ -102,7 +102,7 @@ function renderChart() {
                 dateEnd.select("input").property("disabled", true);
                 const stockType = stockSelector.property("value");
                 function stockSwitch() {
-                    if (d3.select("#Retailchart").innerHTML  !== "") { 
+                    if (d3.select("#Retailchart").innerHTML  !== "" && d3.select("#Techchart").innerHTML !== "" && d3.select("#Enterchart").innerHTML !== "" && d3.select("#Comchart").innerHTML !== "" && d3.select("#Airlinechart").innerHTML !== "") { 
                         switch (stockType) {
                             case 'Retail':
                                 {

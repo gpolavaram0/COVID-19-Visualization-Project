@@ -40,15 +40,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
 
     var dates = stock_data.map(d => d["date_local"]);
     dates.unshift('date');
-
-    //Function to create/switch charts
-    function renderStock() {
-        //Chart value 
-        const stockInputValue = stockInput.property("value")
-        //Create chart on value
-        switch(stockInputValue) {
-            case 'Retail':
-                {
+    
                     /* Retail Chart */
                     var chart = bb.generate({
                         title: {
@@ -90,10 +82,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
 
 
                     });
-                    break;
-                }
-            case 'Tech':
-                {
+
                     /* Technology Chart */
                     var chart = bb.generate({
                         title: {
@@ -133,10 +122,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                         },
                     },
                     });
-                    break;
-                }
-            case 'Entertainment':
-                {
+
                     /* Entertainment Chart */
                     var chart = bb.generate({
                         title: {
@@ -177,10 +163,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
 
                     },
                     });
-                    break;
-                }
-            case 'eCommerce':
-                {
+
                     /* eCommerce Chart */
                     var chart = bb.generate({
                         title: {
@@ -220,10 +203,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                         },
                     },
                     });
-                    break;
-                }
-            case 'Airlines':
-                {
+
                     /* Airline Chart */
                     var chart = bb.generate({
                         title: {
@@ -262,12 +242,4 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                         },
                     },
                     });
-                    break;
-                }
-        }
-    
-    }
-    renderStock();
-    //Event handler for changing chart
-       stockInput.on("change.stock", renderStock);
 });

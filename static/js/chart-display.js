@@ -101,53 +101,61 @@ function renderChart() {
                 dateStart.select("input").property("disabled", true);
                 dateEnd.select("input").property("disabled", true);
                 const stockType = stockSelector.property("value");
-                switch (stockType) {
-                    case 'Retail':
-                        {
-                            d3.select("#Techchart").style("display", "none");
-                            d3.select("#Enterchart").style("display", "none");
-                            d3.select("#Comchart").style("display", "none");
-                            d3.select("#Airlinechart").style("display", "none");
-                            d3.select("#Retailchart").style("display", "inline-block");
-                            break;
+                function stockSwitch() {
+                    if (d3.select("#Retailchart").innerHTML  !== "") { 
+                        switch (stockType) {
+                            case 'Retail':
+                                {
+                                    d3.select("#Techchart").style("display", "none");
+                                    d3.select("#Enterchart").style("display", "none");
+                                    d3.select("#Comchart").style("display", "none");
+                                    d3.select("#Airlinechart").style("display", "none");
+                                    d3.select("#Retailchart").style("display", "inline-block");
+                                    break;
+                                }
+                            case 'Tech':
+                                {
+                                    d3.select("#Techchart").style("display", "inline-block");
+                                    d3.select("#Enterchart").style("display", "none");
+                                    d3.select("#Comchart").style("display", "none");
+                                    d3.select("#Airlinechart").style("display", "none");
+                                    d3.select("#Retailchart").style("display", "none");
+                                    break;
+                                }
+                            case 'Entertainment':
+                                {
+                                    d3.select("#Techchart").style("display", "none");
+                                    d3.select("#Enterchart").style("display", "inline-block");
+                                    d3.select("#Comchart").style("display", "none");
+                                    d3.select("#Airlinechart").style("display", "none");
+                                    d3.select("#Retailchart").style("display", "none");
+                                    break;
+                                }
+                            case 'Communications':
+                                {
+                                    d3.select("#Techchart").style("display", "none");
+                                    d3.select("#Enterchart").style("display", "none");
+                                    d3.select("#Comchart").style("display", "inline-block");
+                                    d3.select("#Airlinechart").style("display", "none");
+                                    d3.select("#Retailchart").style("display", "none");
+                                    break;
+                                }
+                            case 'Airlines':
+                                {
+                                    d3.select("#Techchart").style("display", "none");
+                                    d3.select("#Enterchart").style("display", "none");
+                                    d3.select("#Comchart").style("display", "none");
+                                    d3.select("#Airlinechart").style("display", "inline-block");
+                                    d3.select("#Retailchart").style("display", "none");
+                                    break;
+                                }
+                                }
                         }
-                    case 'Tech':
-                        {
-                            d3.select("#Techchart").style("display", "inline-block");
-                            d3.select("#Enterchart").style("display", "none");
-                            d3.select("#Comchart").style("display", "none");
-                            d3.select("#Airlinechart").style("display", "none");
-                            d3.select("#Retailchart").style("display", "none");
-                            break;
-                        }
-                    case 'Entertainment':
-                        {
-                            d3.select("#Techchart").style("display", "none");
-                            d3.select("#Enterchart").style("display", "inline-block");
-                            d3.select("#Comchart").style("display", "none");
-                            d3.select("#Airlinechart").style("display", "none");
-                            d3.select("#Retailchart").style("display", "none");
-                            break;
-                        }
-                    case 'Communications':
-                        {
-                            d3.select("#Techchart").style("display", "none");
-                            d3.select("#Enterchart").style("display", "none");
-                            d3.select("#Comchart").style("display", "inline-block");
-                            d3.select("#Airlinechart").style("display", "none");
-                            d3.select("#Retailchart").style("display", "none");
-                            break;
-                        }
-                    case 'Airlines':
-                        {
-                            d3.select("#Techchart").style("display", "none");
-                            d3.select("#Enterchart").style("display", "none");
-                            d3.select("#Comchart").style("display", "none");
-                            d3.select("#Airlinechart").style("display", "inline-block");
-                            d3.select("#Retailchart").style("display", "none");
-                            break;
-                        }
-                        }
+                    else {
+                        setTimeout(stockSwitch, 300);
+                    }
+                }
+                stockSwitch();  
                 runiLine();
                 break;
             }

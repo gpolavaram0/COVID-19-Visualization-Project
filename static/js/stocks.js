@@ -14,19 +14,30 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
 
 
     var comp1_data = stock_data.map(d => d["WMT"]);
+    comp1_data.unshift("WMT");
     console.log(comp1_data);   
     var comp2_data = stock_data.map(d => d["TGT"]);
+    comp2_data.unshift("TGT");
     var comp3_data = stock_data.map(d => d["NVDA"]);
+    comp3_data.unshift("NVDA");
     var comp4_data = stock_data.map(d => d["ZM"]);
+    comp4_data.unshift("ZM");
     var comp5_data = stock_data.map(d => d["SPOT"]);
+    comp5_data.unshift("SPOT");
     var comp6_data = stock_data.map(d => d["NFLX"]);
+    comp6_data.unshift("NFLX");
     var comp7_data = stock_data.map(d => d["AMZN"]);
+    comp7_data.unshift("AMZN");
     var comp8_data = stock_data.map(d => d["SHOP"]);
+    comp8_data.unshift("SHOP");
     var comp9_data = stock_data.map(d => d["DAL"]);
+    comp9_data.unshift("DAL");
     var comp10_data = stock_data.map(d => d["UAL"]);
+    comp10_data.unshift("UAL");
 
 
     var dates = stock_data.map(d => d["date_local"]);
+    dates.unshift('date');
     console.log(dates);
 
     /* Retail Chart */

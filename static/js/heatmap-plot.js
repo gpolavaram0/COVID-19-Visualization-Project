@@ -10,16 +10,31 @@ const baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tile
     accessToken: API_KEY
     });
 
+//Create data arrays for heatmap layers
+let infectionArr = [];
+let deathArr = [];
+//Create Heatmap layers
+let infectionLayer = L.heatLayer(infectionArr);
+let deathLayer = L.heatLayer(deathArr);
+//Set Overlay Layers
+let overlayMaps = {
+    Infections: infectionLayer,
+    Deaths: deathLayer
+};
+//Create Layer control
+L.control.layers(overlayMaps).addTo(Map);
+
 //create map
 const Map = L.map("infection-heatmap", {
     center: [39.50, -98.35],
     zoom: 4,
-    layers: [baseLayer]
+    layers: [baseLayer, infectionLayer]
 });
 
 //Function to run code
 function runInfection() {
     let infectionDateValue = infectionDate.property("value");
+    console.log(infectionDateValue);
 
     //Read in infection & death data
     d3.json(`https://covid19bootcampproject3.herokuapp.com/county_clean/${infectionDateValue}`, infectionData => {
@@ -28,56 +43,19 @@ function runInfection() {
             d.cases = +d.cases;
             d.deaths = +d.deaths;
         });
-
-        //Create data arrays for heatmap layers
-        let infectionArr = [];
-        let deathArr = [];
-        //Add lat lngs to the arrays
+        
+        //Reset arrays
+        infectionArr = [];
+        deathArr = [];
+        //Add data
         infectionData.forEach(d => {
             infectionArr.push([d.lat, d.long, d.cases]);
-             deathArr.push([d.lat, d.long, d.deaths]);
+            deathArr.push([d.lat, d.long, d.deaths]);
             }
         );
-
-        //Create Heatmap layers
-        let infectionLayer = L.heatLayer(infectionArr);
-        let deathLayer = L.heatLayer(deathArr);
-
-        //Add default layer to map object
-        Map.layers.push(infectionLayer);
-
-        //Set Overlay Layers
-        let overlayMaps = {
-            Infections: infectionLayer,
-            Deaths: deathLayer
-        };
-
-        //Create Layer control
-        L.control.layers(overlayMaps).addTo(Map);
-
-        function renderInfection() {
-            //Grab date value
-            infectionDateValue = infectionDate.property("value");
-            console.log(infectionDateValue);
-            //Reset arrays
-            infectionArr = [];
-            deathArr = [];
-            //Repush data
-            infectionData.forEach(d => {
-                infectionArr.push([d.lat, d.long, d.cases]);
-                 deathArr.push([d.lat, d.long, d.deaths]);
-                }
-            );
-            //Reset layers
-            infectionLayer.setLatLngs(infectionArr);
-            deathLayer.setLatLngs(deathArr);
-        }
-
-        //Add legend to map
-        legend.addTo(Map);
-
-        //Event handler to update heatmap
-        infectionDate.on("change.heat", renderInfection);
+        //Reset layers
+        infectionLayer.setLatLngs(infectionArr);
+        deathLayer.setLatLngs(deathArr);
     });
 }
 
@@ -101,5 +79,9 @@ legend.onAdd = function (map) {
     return div;
 }   
 
+//Add legend to map
+legend.addTo(Map);
+
 //Event handler to begin running code
 infectionDateType.on("change.heat", runInfection);
+infectionDate.on("change.heat", runInfection);

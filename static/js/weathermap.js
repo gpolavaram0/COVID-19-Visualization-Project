@@ -72,7 +72,7 @@ function runAir() {
         COLayer.setLatLngs(COArr);
         O3Layer.setLatLngs(O3Arr);
         NO2Layer.setLatLngs(NO2Arr);
-        SO2Layer.setLatLngs(SO2Layer);
+        SO2Layer.setLatLngs(SO2Arr);
     });
 }
 

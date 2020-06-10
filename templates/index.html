@@ -5,8 +5,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>The COVID-19 Affect</title>
-        <!--Billboard CSS-->
-        <link rel="stylesheet" href="static/css/billboard.min.css">
         <!--Bootstrap CSS-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="static/css/style.css">
@@ -24,8 +22,6 @@
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <!--PopDen data-->
         <script type="text/javascript" src="static/js/us-states_popDen.js"></script>
-        <!--Billboard JS-->
-        <script type="text/javascript" src="static/js/billboard.min.js"></script>
         <!--Config file for API calling-->
         <script type="text/javascript" src="static/js/config.js"></script>
     </head>
@@ -83,6 +79,7 @@
             <div class="stock">
                 <h1>Stock Comparison</h1>
                 <hr>
+                <h2><a href="stock.html">Visit Stock Visualization</a></h2>
                 <p>Explore how the growing pandemic affected the stock prices of several large companies in different sectors. Sectors provided are Retail, Technology, Entertainment, eCommerce, and Airlines. The way disaster changes economy can be unexpected and lasting. Data shown is gathered for January 22, 2020 to May 25, 2020.</p>
             </div>
             <div class="weather">
@@ -99,11 +96,6 @@
         <!--Containers for dashboard charts-->
         <div class="col-5 comparator" id="infection-heatmap"></div>
         <div class="col-5 comparator line-pop" id="infection-line"></div>
-        <div class="col-5 comparator stock stock-chart" id="Retailchart"></div>
-        <div class="col-5 comparator stock stock-chart" id="Techchart"></div>
-        <div class="col-5 comparator stock stock-chart" id="Enterchart"></div>
-        <div class="col-5 comparator stock stock-chart" id="Comchart"></div>
-        <div class="col-5 comparator stock stock-chart" id="Airlinechart"></div>
         <div class="col-5 comparator weather" id="weather-heatmap"></div>
         <div class="col-5 comparator weather line-pop" id="weather-line"></div>
         <div class="col-5 comparator popDen" id="popDen-choro"></div>
@@ -146,8 +138,6 @@
         <script src="static/js/air-line.js"></script>
         <!--JS for Population Density Choropleth-->
         <script src="static/js/popDen-plot.js"></script>
-        <!--JS for Stock graphs-->
-        <script src="static/js/stocks.js"></script>
         <!--JS for changing Display-->
         <script src="static/js/chart-display.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

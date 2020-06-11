@@ -137,10 +137,6 @@ ul {
     margin-bottom: auto;
 }
 
-.stock-chart {
-    background-color: white;
-}
-
 @media (max-width: 768px) {
     img.blur {
         width: auto;

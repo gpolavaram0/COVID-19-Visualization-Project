@@ -224,7 +224,7 @@ def stocks():
     return jsonify(stock_data_lod)
 
 
-@app.route("/stock-page")
+@app.route("/stock-page.html")
 def stock_page():
 
     stock_data = get_data.main()

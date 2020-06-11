@@ -39,23 +39,23 @@
         </div>
         <!--Inputs for map comparisons-->
         <div class="input-group mb-3">
-            <div class="form-group col-2">
+            <div class="form-group col-3">
                 <select class="form-control" id="date-type" aria-describedby="date-type-help">
                     <option>Date Range</option>
                     <option>Single Date</option>
                 </select>
                 <small id="date-type-help" class="form-text text-muted">Date Type</small>
             </div>
-            <div class="form-group col-2" id="start-date-holder">
+            <div class="form-group col-3" id="start-date-holder">
                 <input type="date" class="form-control" id="start-date" aria-describedby="start-date-help">
                 <small id="start-date-help" class="form-text text-muted">Start Date</small>
             </div>
-            <div class="form-group col-2" id="end-date-holder">
+            <div class="form-group col-3" id="end-date-holder">
                 <input type="date" class="form-control" id="end-date" aria-describedby="end-date-help">
                 <small id="end-date-help" class="form-text text-muted">End Date</small>
             </div>
-            <input type="date" class="form-control col-2" id="date-input">
-            <div class="form-group col-2">
+            <input type="date" class="form-control col-3" id="date-input">
+            <div class="form-group col-3">
                 <select class="form-control" id="comparison" aria-describedby="comparison-selector-help">
                     <option>Weather Comparison</option>
                     <option>Stock Lookup</option>
@@ -63,24 +63,14 @@
                 </select>
                 <small id="comparison-selector-help" class="form text text-muted">Select Comparison</small>
             </div>
-            <div class="form-group col-2 stock">
-                <select class="form-control" id="stock-selector" aria-describedby="stock-selector-help" disabled>
-                    <option>Retail</option>
-                    <option>Tech</option>
-                    <option>Entertainment</option>
-                    <option>eCommerce</option>
-                    <option>Airlines</option>
-                </select>
-                <small id="stock-selector-help" class="form-text text-muted">Select Stock Industry</small>
-            </div>
         </div>
         <!--Comparison info and limitations-->
         <div class="col-10 information">
             <div class="stock">
                 <h1>Stock Comparison</h1>
                 <hr>
-                <h2><a href="stock.html">Visit Stock Visualization</a></h2>
-                <p>Explore how the growing pandemic affected the stock prices of several large companies in different sectors. Sectors provided are Retail, Technology, Entertainment, eCommerce, and Airlines. The way disaster changes economy can be unexpected and lasting. Data shown is gathered for January 22, 2020 to May 25, 2020.</p>
+                <h3><a href="stock-page.html">Stock Comparison Visualization</a></h3>
+                <p>View a comparison of different industries stock prices as the rate of COVID-19 infection spread across America. Data obtained is from January 22, 2020 to May 25, 2020.</p>
             </div>
             <div class="weather">
                 <h1>Air Quality Comparison</h1>
@@ -106,7 +96,7 @@
                 <hr>
                 <ul>
                     <li><span>COVID-19 Cases and Death Data:</span> <a href="https://www.kaggle.com/fireballbyedimyrnmom/us-counties-covid-19-dataset" target="_blank">Kaggle CSV</a> of New York Times Publshed Data</li>
-                    <li><span>Stock Data: <a href="https://github.com/lukaszbanasiak/yahoo-finance" target="_blank">Yahoo-Finance</a></span> python library</li>
+                    <li><span>Stock Data:</span> <a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a> from the <a href="https://github.com/lukaszbanasiak/yahoo-finance">yahoo-finance</a> python library.</li>
                 </ul>
             </div>
             <div class="weather">

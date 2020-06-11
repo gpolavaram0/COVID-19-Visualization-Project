@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The COVID-19 Affect Stock Visualization</title>
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!--Billboard CSS-->
+        <link rel="stylesheet" type="text/css" href="static/css/billboard.min.css">
+        <link rel="stylesheet" type="text/css" href="static/css/style.css">
+        <link rel="stylesheet" type="text/css" href="static/css/stock.css">
+        <!--D3 Script-->
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <!--Plotly Script-->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <!--Billboard JS-->
+        <script src="static/js/billboard.min.js"></script>
+    </head>
+
+    <body>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="jumbotron-background">
+                <img src='https://github.com/coconutpep/US-COVID19-Effect/blob/master/docs/static/images/jumbo-background.png?raw=true' class="blur " id="large">
+            </div>
+            <div class="container">
+              <h1 class="display-4">The COVID-19 Affect Stock Visualization</h1>
+              <hr>
+              <p class="lead">This page allows you to compare the trends in stocks during the COVID-19 Pandemic in America. Data is provided for January 22, 2020 to May 25, 2020.</p>
+            </div>
+        </div>
+
+        <div class="col-10" id="infection-line"></div>
+        <div class="col-10 stock-chart" id="Retailchart"></div>
+        <div class="col-10 stock-chart" id="Techchart"></div>
+        <div class="col-10 stock-chart" id="Enterchart"></div>
+        <div class="col-10 stock-chart" id="Comchart"></div>
+        <div class="col-10 stock-chart" id="Airlinechart"></div>
+
+        <!--Infection line graph JS-->
+        <script src="static/js/infect-line.js"></script>
+        <!--Stock chart JS-->
+        <script src="static/js/stocks.js"></script>
+    </body>
+</html>

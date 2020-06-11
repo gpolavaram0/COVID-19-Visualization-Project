@@ -225,7 +225,7 @@ def stocks():
 
 
 @app.route("/stock-page")
-def stocks():
+def stocks_page():
 
     stock_data = get_data.main()
         

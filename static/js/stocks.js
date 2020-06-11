@@ -1,4 +1,3 @@
-function runstock() {
 //Call in data
 d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
     var comps = ['WMT', 'TGT', 'NVDA', 'ZM', 'SPOT', 'NFLX', 'AMZN', 'SHOP', 'DAL', 'UAL'];
@@ -87,7 +86,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                     text: "Technology Market - Nvidia (NVDA) vs Zoom (ZM)"
                 },
 
-            bindto: "Techchart",
+            bindto: "#Techchart",
             data: {
                 x: "date",
                 columns: [
@@ -127,7 +126,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                     text: "Entertainment Market - Spotify (SPOT) vs Netflix (NFLX)"
                 },
 
-            bindto: "Enterchart",
+            bindto: "#Enterchart",
             data: {
                 x: "date",
                 columns: [
@@ -168,7 +167,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                     text: "eCommerce Market - Amazon (AMZN) vs Shopify (SHOP)"
                 },
 
-            bindto: "Comchart",
+            bindto: "#Comchart",
             data: {
                 x: "date",
                 columns: [
@@ -207,7 +206,7 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
                 title: {
                     text: "Airline Market - Delta (DAL) vs United (UAL)"
                 },
-            bindto: "Airlinechart",
+            bindto: "#Airlinechart",
             data: {
                 x: "date",
                 columns: [
@@ -241,4 +240,3 @@ d3.json("https://covid19bootcampproject3.herokuapp.com/stocks", stock_data => {
             },
             });
 });
-}

@@ -50,36 +50,13 @@ tickers = pd.DataFrame({
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hdjdaacogqimcu:a6007ea2abde788e2b86e856357cb8741377410b135800ea087bd2780f50e2fb@ec2-52-44-55-63.compute-1.amazonaws.com:5432/dbh8e6jsnrlr1k'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:Eagle2fox1!project2@project2db.cvkw7pcnugqv.us-east-2.rds.amazonaws.com:5432/project2db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:Eagle2fox1!project2@project2db.cvkw7pcnugqv.us-east-2.rds.amazonaws.com:5432/project2db'
 
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI_AWS
 
-# engine = create_engine('postgresql://scott:tiger@localhost/mydatabase')
 
 # # Connects to the database using the app config
 db = SQLAlchemy(app)
-
-# test_data = db.Table('test_data_csv', db.metadata, autoload = True, autoload_with = db.engine)
-# db.Model.metadata.reflect(bind=db.engine,schema='dbh8e6jsnrlr1k')
-# db.reflect(bind='__all__', app=None)
-
-# Base = automap_base()
-# Base.prepare(engine, reflect=True)
-# test_data_csv = Base.classes.test_data_csv
-
-# infection_date = db.Table('infection_date', db.metadata, autoload = True, autoload_with = db.engine)
-
-# infection_date = db.Table('infection_date', db.metadata, autoload = True, autoload_with = db.engine)
-# infection_date_query = db.session.query(infection_date).all()
-
-###############infection_date#########################
-
-#extracts infection_date_csv from postgres and converts to list of dictionaries in route /infection_date
-# infection_date = db.Table('infection_date', db.metadata, autoload = True, autoload_with = db.engine)
-# infection_date_query = db.session.query(infection_date).all()
-# infection_date_df = pd.DataFrame(infection_date_query, columns = ['date','cases','deaths'])
-# infection_date_df = infection_date_df.reset_index(drop=True)
-# infection_date_lod = infection_date_df.to_dict('records')
-######################################################
 
 def database_csv_retriever(csv_name, *args):
     csv_name_db = db.Table(csv_name, db.metadata, autoload = True, autoload_with = db.engine)

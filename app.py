@@ -52,7 +52,7 @@ tickers = pd.DataFrame({
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:Eagle2fox1!project2@project2db.cvkw7pcnugqv.us-east-2.rds.amazonaws.com:5432/project2db'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI_AWS
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI_AWS"]
 
 
 # # Connects to the database using the app config

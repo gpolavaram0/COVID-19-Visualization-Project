@@ -67,7 +67,7 @@ def load_stock_data(tickers):
     
     
     # connect to the database
-    connection_string = 'hdjdaacogqimcu:a6007ea2abde788e2b86e856357cb8741377410b135800ea087bd2780f50e2fb@ec2-52-44-55-63.compute-1.amazonaws.com:5432/dbh8e6jsnrlr1k'
+    connection_string = os.environ['CONNECTION_STRING']
     engine = create_engine(f'postgresql://{connection_string}')
     
     # if the table exists set the start date to one day past the last date in the db

@@ -1858,7 +1858,7 @@
 		}
 
 	header p {
-		color: #bbb;
+		color: #969595;
 		position: relative;
 		margin: 0 0 1.5em 0;
 	}
@@ -2279,7 +2279,7 @@
 		}
 
 			.image.fit img {
-				width: 100%;
+				width: 75%;
 			}
 
 		.image.main {
@@ -2716,7 +2716,7 @@
 	}
 
 		.subpage #header {
-			background: #5385c1;
+			background: #220301;
 			top: 0;
 			height: 44px;
 			line-height: 44px;

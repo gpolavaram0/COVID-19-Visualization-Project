@@ -26,6 +26,8 @@ function changeDate() {
         infectLine.style("display", "none");
         airMap.style("display", "");
         airLine.style("display", "none");
+        runAir();
+        runInfection();
     }
 }
 

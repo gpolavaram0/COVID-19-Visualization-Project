@@ -62,6 +62,31 @@ def welcome():
 
     return render_template("index.html")
 
+@app.route("/about.html")
+def team():
+
+    return render_template("about.html")
+
+@app.route("/comparisons.html")
+def comparisons():
+
+    return render_template("comparisons.html")
+
+@app.route("/airquality.html")
+def air_page():
+
+    return render_template("airquality.html")
+
+@app.route("/stock.html")
+def stock_page():
+
+    return render_template("stock.html")
+
+@app.route("/popden.html")
+def popDen_page():
+
+    return render_template("popden.html")
+
 @app.route("/test")
 def test():
    

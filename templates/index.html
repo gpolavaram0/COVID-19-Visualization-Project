@@ -1,137 +1,161 @@
-<!DOCTYPE html>
-<html lang='en-us'>
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>The COVID-19 Affect</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../static/css/main.css" />
+	</head>
+	<body>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>The COVID-19 Affect</title>
-        <!--Bootstrap CSS-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="static/css/style.css">
-        <!-- Leaflet CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
-        <!--D3 Script-->
-        <script src="https://d3js.org/d3.v4.min.js"></script>
-        <!--Leaflet Script-->
-        <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-        crossorigin=""></script>
-        <!--Leaflet-heatmap plugin-->
-        <script src="static/js/leaflet-heat.js"></script>
-        <!--Plotly Script-->
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <!--PopDen data-->
-        <script type="text/javascript" src="static/js/us-states_popDen.js"></script>
-        <!--Config file for API calling-->
-        <script type="text/javascript" src="static/js/config.js"></script>
-    </head>
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="index.html" class="logo">COVID-19 Affect</a>
+					<nav id="nav">
+						<a href="index2.html">Home</a>
+						<a href="comparisons.html">Comparisons</a>
+						<a href="about.html">Team Bio</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
 
-    <body>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="jumbotron-background">
-                <img src='https://github.com/coconutpep/US-COVID19-Effect/blob/master/docs/static/images/jumbo-background.png?raw=true' class="blur " id="large">
-            </div>
-            <div class="container">
-              <h1 class="display-4">The COVID-19 Affect</h1>
-              <hr>
-              <p class="lead">This interactive dashboard allows you to investigate the affect of COVID-19 on various aspects of American society. Investigate how stocks, hospitals, and weather statistics changed during the Coronavirus Pandemic of 2020 in comparison with the spread of infection across the continental U.S.</p>
-            </div>
-        </div>
-        <!--Inputs for map comparisons-->
-        <div class="input-group mb-3">
-            <div class="form-group col-3">
-                <select class="form-control" id="date-type" aria-describedby="date-type-help">
-                    <option>Date Range</option>
-                    <option>Single Date</option>
-                </select>
-                <small id="date-type-help" class="form-text text-muted">Date Type</small>
-            </div>
-            <div class="form-group col-3" id="start-date-holder">
-                <input type="date" class="form-control" id="start-date" aria-describedby="start-date-help">
-                <small id="start-date-help" class="form-text text-muted">Start Date</small>
-            </div>
-            <div class="form-group col-3" id="end-date-holder">
-                <input type="date" class="form-control" id="end-date" aria-describedby="end-date-help">
-                <small id="end-date-help" class="form-text text-muted">End Date</small>
-            </div>
-            <input type="date" class="form-control col-3" id="date-input">
-            <div class="form-group col-3">
-                <select class="form-control" id="comparison" aria-describedby="comparison-selector-help">
-                    <option>Weather Comparison</option>
-                    <option>Stock Lookup</option>
-                    <option>Population Density Comparison</option>
-                </select>
-                <small id="comparison-selector-help" class="form text text-muted">Select Comparison</small>
-            </div>
-        </div>
-        <!--Comparison info and limitations-->
-        <div class="col-10 information">
-            <div class="stock">
-                <h1>Stock Comparison</h1>
-                <hr>
-                <h3><a href="stock-page.html">Stock Comparison Visualization</a></h3>
-                <p>View a comparison of different industries stock prices as the rate of COVID-19 infection spread across America. Data obtained is from January 22, 2020 to May 25, 2020.</p>
-            </div>
-            <div class="weather">
-                <h1>Air Quality Comparison</h1>
-                <hr>
-                <p>Explore how four major air quality parameters have changed over the course of the COVID-19 pandemic in America. We've pulled recent data from the Environmental Protection Agency's API which provides data on every air quality parameter there is. For the purposes of these visualizations we pulled the levels of Carbon Monoxide, Ozone, Nitrogen Dioxide, and Sulfur Dioxide levels in the air over America since January 22, 2020. Data for visualizing over a date range has been aggregated to show the mean pollutant levels in air over America. Due to the struggles of COVID and the nature of pulling this kind of data currently is incomplete past March, 31, 2020.</p>
-            </div>
-            <div class="popDen">
-                <h1>Population Density Comparison</h1>
-                <hr>
-                <p>Explore how COVID-19 moved through the United States based on each state's population density. Since the most recent census, 2020, has not yet concluded the 2010 census data was used to gather population density information.</p>
-            </div>
-        </div>
-        <!--Containers for dashboard charts-->
-        <div class="col-5 comparator" id="infection-heatmap"></div>
-        <div class="col-5 comparator line-pop" id="infection-line"></div>
-        <div class="col-5 comparator weather" id="weather-heatmap"></div>
-        <div class="col-5 comparator weather line-pop" id="weather-line"></div>
-        <div class="col-5 comparator popDen" id="popDen-choro"></div>
-        <!--Links to data sources-->
-        <div class="information" id="reference">
-            <div class="stock">
-                <h1>Visualizations Powered by Data from:</h1>
-                <hr>
-                <ul>
-                    <li><span>COVID-19 Cases and Death Data:</span> <a href="https://www.kaggle.com/fireballbyedimyrnmom/us-counties-covid-19-dataset" target="_blank">Kaggle CSV</a> of New York Times Publshed Data</li>
-                    <li><span>Stock Data:</span> <a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a> from the <a href="https://github.com/lukaszbanasiak/yahoo-finance">yahoo-finance</a> python library.</li>
-                </ul>
-            </div>
-            <div class="weather">
-                <h1>Visualizations Powered by Data from:</h1>
-                <hr>
-                <ul>
-                    <li><span>COVID-19 Cases and Death Data:</span> <a href="https://www.kaggle.com/fireballbyedimyrnmom/us-counties-covid-19-dataset" target="_blank">Kaggle CSV</a> of New York Times Publshed Data</li>
-                    <li><span>Air Quality Data:</span> <a href="https://aqs.epa.gov/aqsweb/documents/data_api.html" target="_blank">AQS API</a> from EPA</li>
-                </ul>
-            </div>
-            <div class="popDen">
-                <h1>Visualizations Powered by Data from:</h1>
-                <hr>
-                <ul>
-                    <li><span>COVID-19 Cases and Death Data:</span> <a href="https://www.kaggle.com/fireballbyedimyrnmom/us-counties-covid-19-dataset" target="_blank">Kaggle CSV</a> of New York Times Publshed Data</li>
-                    <li><span>Population Density Data:</span> <a href="https://www.census.gov/data/datasets/2010/dec/summary-file-1.html" target="_blank">2010 Census</a> from the Census Bureau</li>
-                    <li><span>GeoJSON Population Density Format:</span> <a href="https://leafletjs.com/examples/choropleth/us-states.js">Leaflet Tutorials</a></li>
-                </ul>
-            </div>
-        </div>
+		<!-- Banner -->
+			<section id="banner">
+				<h1>The COVID-19 Affect</h1>
+				<p>An overview of how COVID-19 has impacted America.</p>
+			</section>
 
-        <!--JS for heatmap plot-->
-        <script src="static/js/heatmap-plot.js"></script>
-        <!--JS for infection line graph-->
-        <script src="static/js/infect-line.js"></script>
-        <!--JS for Air quality-->
-        <script src="static/js/weathermap.js"></script>
-        <!--JS for Air quality line graph-->
-        <script src="static/js/air-line.js"></script>
-        <!--JS for Population Density Choropleth-->
-        <script src="static/js/popDen-plot.js"></script>
-        <!--JS for changing Display-->
-        <script src="static/js/chart-display.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    </body>
+		<!-- One -->
+			<section id="one" class="wrapper">
+				<div class="inner">
+					<div class="flex flex-3">
+						<article>
+							<header>
+								<h3>Air Quality</h3>
+							</header>
+							<p>See how the air quality has changed over the COVID-19 pandemic in America with less travel and production happening.</p>
+							<footer>
+								<a href="airquality.html" class="button special">View</a>
+							</footer>
+						</article>
+						<article>
+							<header>
+								<h3>Stock Value</h3>
+							</header>
+							<p>See how the value of several stocks have been imapcted during the COVID-19 pandemic. Industries included in the visualizations include Tech, Airlines, Entertainment, E-commerce, and Retail.</p>
+							<footer>
+								<a href="stock.html" class="button special">View</a>
+							</footer>
+						</article>
+						<article>
+							<header>
+								<h3>Population Density</h3>
+							</header>
+							<p>See how the population density across the states have impacted the spread of COVID-19 in America./p>
+							<footer>
+								<a href="popden.html" class="button special">View</a>
+							</footer>
+						</article>
+					</div>
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="wrapper style1 special">
+				<div class="inner">
+					<header>
+						<h2>The Team</h2>
+						<p><a href='about.html' style="color:#9a9a9a;">See Full Bios</a></p>
+					</header>
+					<div class="flex flex-4">
+						<div class="box person">
+							<div class="image round">
+								<img src="../static/images/ryan.jpg" alt="Person 1" />
+							</div>
+							<h3>Ryan Klueg</h3>
+							<p>Data Analysis / Web Development</p>
+						</div>
+						<div class="box person">
+							<div class="image round">
+								<img src="../static/images/gouthamp.JPG" alt="Person 2" />
+							</div>
+							<h3>Goutham Polavaram</h3>
+							<p>Database Analyst/Site Deployment</p>
+						</div>
+						<div class="box person">
+							<div class="image round">
+								<img src="../static/images/Mahamat.png" alt="Person 3" />
+							</div>
+							<h3>Ibrahim Oumar</h3>
+							<p>Data Analysis</p>
+						</div>
+						<div class="box person">
+							<div class="image round">
+								<img src="../static/images/sumeet.png" alt="Person 4" />
+							</div>
+							<h3>Sumeet Dhawan</h3>
+							<p>Data Analysis / Web Development</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		<!-- Three -->
+			<section id="three" class="wrapper special">
+				<div class="inner">
+					<div class="flex flex-2">
+						<article>
+							<div class="image fit">
+								<img src="../static/images/repository-main.png" alt="Pic 01" />
+							</div>
+							<header>
+								<h3>Explore the Code</h3>
+							</header>
+							<p>Visit our Github repository to explore our code and see how our analysis came together. Repository is used for the deployment of this website so includes code for running the page, server, database calls, and data cleaning.</p>
+							<footer>
+								<a href="https://github.com/gpolavaram0/covid19project" class="button special">More</a>
+							</footer>
+						</article>
+						<article>
+							<div class="image fit">
+								<img src="../static/images/scott-graham-5fNmWej4tAA-unsplash.jpg" alt="Pic 02" /> <!--Photo by Scott Graham on Unsplash https://unsplash.com/@sctgrhm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText-->
+							</div>
+							<header>
+								<h3>Team Bio</h3>
+							</header>
+							<p>This project took several people hundreds of hours of work to make. If you are curious about who was involved check out their profiles on the Team Bio page.</p>
+							<footer>
+								<a href="about.html" class="button special">More</a>
+							</footer>
+						</article>
+					</div>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+						</div>
+						<ul class="icons">
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>

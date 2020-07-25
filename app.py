@@ -78,7 +78,7 @@ def air_page():
     return render_template("airquality.html")
 
 @app.route("/stock.html")
-def stock_page():
+def stock_page_update():
 
     return render_template("stock.html")
 

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Stock Value Comparison</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../static/css/main.css" />
+		<!--Billboard CSS-->
+		<link rel="stylesheet" type="text/css" href="../static/css/billboard.min.css">
+		<!--D3 Script-->
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<!--Plotly Script-->
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<!--Billboard JS-->
+		<script src="../static/js/billboard.min.js"></script>
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="index.html" class="logo">COVID-19 Affect</a>
+					<nav id="nav">
+						<a href="index.html">Home</a>
+						<a href="comparisons.html">Comparisons</a>
+						<a href="about.html">Team Bio</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- Three -->
+			<section id="three" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h2>Stock Value</h2>
+						<p>How were different industries affected by COVID?</p>
+					</header>
+					<p>View how the spread of COVID-19 has affected the stock values of 5 different industry sectors. Data has been provided for two competitors in each industry. Industries included are Retail, E-commerce, Technology, Entertainment, and Airlines.</p>
+					<h3>Data Obtained From:</h3>
+					<ul class="references">
+						<li>COVID-19 Infections and Deats obtained from <a href="https://www.kaggle.com/fireballbyedimyrnmom/us-counties-covid-19-dataset" target="_blank">Kaggle</a></li>
+						<li>Stock values obtained from <a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a> through the <a href="https://github.com/lukaszbanasiak/yahoo-finance" target="_blank">yahoo-finance</a> python library.</li>
+					</ul>
+					<hr>
+					<div class="flex flex-2">
+						<article>
+							<select class="form-control" id="stock-selector" aria-describedby="stock-selector-help">
+								<option>Retail</option>
+								<option>Technology</option>
+								<option>Entertainment</option>
+								<option>E-commerce</option>
+								<option>Airlines</option>
+							</select>
+							<small id="stock-selector-help" class="form-text text-muted">Select Industry</small>
+						</article>
+					</div>
+				</div>
+			</section>
+
+		<!--Four-->
+			<section id="four" class="wrapper">
+				<div class="inner">
+					<div class="flex flex-2">
+						<article id="covid-line">
+							<h3>COVID Infection & Death Timeline</h3>
+							<div id="infection-line" class="image fit"></div>
+						</article>
+						<article id="Retail">
+							<h3>Retail Industry: Walmart vs. Target</h3>
+							<div id="Retailchart" class="image fit"></div>
+						</article>
+						<article id="Tech">
+							<h3>Technology Industry: Nvidia vs. Zoom</h3>
+							<div id="Techchart" class="image fit"></div>
+						</article>
+						<article id="Entertainment">
+							<h3>Entertainment Industry: Spotify vs. Netflix</h3>
+							<div id="Enterchart" class="image fit"></div>
+						</article>
+						<article id="Ecomm">
+							<h3>E-commerce Industry: Amazon vs. Shopify</h3>
+							<div id="Comchart" class="image fit"></div>
+						</article>
+						<article id="Airline">
+							<h3>Airline Industry: Delta vs. United</h3>
+							<div id="Airlinechart" class="image fit"></div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+						</div>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="../static/js/jquery.min.js"></script>
+			<script src="../static/js/skel.min.js"></script>
+			<script src="../static/js/util.js"></script>
+			<script src="../static/js/main.js"></script>
+			<!--Infection line graph JS-->
+			<script src="../static/js/infect-line.js"></script>
+			<!--Stock chart JS-->
+			<script src="../static/js/stocks.js"></script>
+			<!--Script to change display-->
+			<script src="../static/js/stock-display.js"></script>
+
+	</body>
+</html>

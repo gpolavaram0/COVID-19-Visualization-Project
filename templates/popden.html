@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Population Density Comparison</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../static/css/main.css" />
+		<!-- Leaflet CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+		<!--D3 Script-->
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<!--Leaflet Script-->
+		<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+		integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+		crossorigin=""></script>
+		<!--Leaflet-heatmap plugin-->
+		<script src="static/js/leaflet-heat.js"></script>
+		<!--Plotly Script-->
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<!--PopDen data-->
+		<script type="text/javascript" src="../static/js/us-states_popDen.js"></script>
+		<!--Config file for API calling-->
+		<script type="text/javascript" src="../static/js/config.js"></script>
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="index.html" class="logo">COVID-19 Affect</a>
+					<nav id="nav">
+						<a href="index.html">Home</a>
+						<a href="comparisons.html">Comparisons</a>
+						<a href="about.html">Team Bio</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- Three -->
+			<section id="three" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h2>Population Density</h2>
+						<p>How did states' population density affect the spread of COVID?</p>
+					</header>
+					<p>This page provides both a daily spread comparison as well as a timeline comparison for the spread of COVID-19 vs. the population density in each state. Viral infections spread quicker in more densely populated areas due to higher rates of contact with infected individuals.</p>
+					<h3>Data Obtained From:</h3>
+					<ul class="references">
+						<li>COVID-19 Infections and Deats obtained from <a href="https://www.kaggle.com/fireballbyedimyrnmom/us-counties-covid-19-dataset" target="_blank">Kaggle</a></li>
+						<li>Population data obtained from the <a href="https://www.census.gov/data/datasets/2010/dec/summary-file-1.html" target="_blank">2010 Census</a> conducted by the Census Bureau. GeoJson format provided by <a href="https://leafletjs.com/examples/choropleth/us-states.js">Leaflet Tutorials</a></li>
+					</ul>
+					<hr>
+					<div class="flex flex-3">
+						<article>
+							<div>
+								<select class="form-control" id="date-type" aria-describedby="date-type-help">
+									<option>Date Range</option>
+									<option>Single Date</option>
+								</select>
+								<small id="date-type-help" class="form-text text-muted">Date Type</small>
+							</div>
+						</article>
+						<article id="start-date-holder">
+							<div class="form-group col-3" id="start-date-holder">
+								<input type="date" class="form-control" id="start-date" aria-describedby="start-date-help">
+								<small id="start-date-help" class="form-text text-muted">Start Date</small>
+							</div>
+						</article>
+						<article id="end-date-holder">
+							<div class="form-group col-3" id="end-date-holder">
+								<input type="date" class="form-control" id="end-date" aria-describedby="end-date-help">
+								<small id="end-date-help" class="form-text text-muted">End Date</small>
+							</div>
+						</article>
+						<article id="date-holder">
+							<input type="date" class="form-control col-3" id="date-input">
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!--Four-->
+				<section id="four" class="wrapper">
+					<div class="inner">
+						<div class="flex flex-2">
+							<article id="covid-heat">
+								<h3>COVID Infection & Death Daily Heatmap</h3>
+								<div id="infection-heatmap" class="image fit"></div>
+							</article>
+							<article id="covid-line">
+								<h3>COVID Infection & Death Timeline</h3>
+								<div id="infection-line" class="image fit"></div>
+							</article>
+							<article>
+								<h3>Population Density Heatmap</h3>
+								<div id="popDen-choro" class="image fit"></div>
+							</article>
+
+						</div>
+					</div>
+				</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+						</div>
+						<ul class="icons">
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<!--JS for heatmap plot-->
+			<script src="../static/js/heatmap-plot.js"></script>
+			<!--JS for infection line graph-->
+			<script src="../static/js/infect-line.js"></script>
+			<!--JS for Population Density Choropleth-->
+			<script src="../static/js/popDen-plot.js"></script>
+			<!--Script for changing display-->
+			<script src="../static/js/popDen-display.js"></script>
+
+	</body>
+</html>

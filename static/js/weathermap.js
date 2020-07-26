@@ -17,10 +17,10 @@ let O3Arr = [];
 let NO2Arr = [];
 let SO2Arr = [];
 //Create initial heatmap layers
-let COLayer = L.heatLayer(COArr, {radius:50, blur:30});
-let O3Layer = L.heatLayer(O3Arr, {radius:50, blur:30});
-let NO2Layer = L.heatLayer(NO2Arr, {radius:50, blur:30});
-let SO2Layer = L.heatLayer(SO2Arr, {radius:50, blur:30});
+let COLayer = L.heatLayer(COArr, {radius:75, blur:30});
+let O3Layer = L.heatLayer(O3Arr, {radius:75, blur:30});
+let NO2Layer = L.heatLayer(NO2Arr, {radius:75, blur:30});
+let SO2Layer = L.heatLayer(SO2Arr, {radius:75, blur:30});
 //Set Overlay Layers
 const airoverlayMaps = {
     "Sulfur Dioxide (ppb)": SO2Layer,
@@ -49,7 +49,7 @@ function runAir() {
     d3.json(`https://covid19bootcampproject3.herokuapp.com/air_quality/${airDateValue}`, airData => {
         //Parse through data
         airData.forEach(d => {
-            d.observation_count = +d.observation_count * 100
+            d.observation_count = +d.observation_count * 10
         });
 
         //Set seperate objects for each parameter

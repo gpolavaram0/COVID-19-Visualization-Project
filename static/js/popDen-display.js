@@ -20,7 +20,6 @@ function changeDate() {
         endDateHolder.style("display", "none");
         infectMap.style("display", "");
         infectLine.style("display", "none");
-        runInfection();
     }
 }
 

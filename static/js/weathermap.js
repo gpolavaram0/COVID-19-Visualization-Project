@@ -49,7 +49,7 @@ function runAir() {
     d3.json(`https://covid19bootcampproject3.herokuapp.com/air_quality/${airDateValue}`, airData => {
         //Parse through data
         airData.forEach(d => {
-            d.observation_count = +d.observation_count
+            d.observation_count = +d.observation_count * 100
         });
 
         //Set seperate objects for each parameter

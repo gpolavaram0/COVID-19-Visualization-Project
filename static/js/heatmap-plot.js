@@ -83,6 +83,7 @@ legend.onAdd = function (map) {
 //Add legend to map
 legend.addTo(Map);
 
+runInfection();
 //Event handler to begin running code
 infectionDateType.on("change.heat", runInfection);
 infectionDate.on("change.heat", runInfection);

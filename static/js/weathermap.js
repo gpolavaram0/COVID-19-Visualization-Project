@@ -99,6 +99,7 @@ legendAir.onAdd = function (map) {
 //Add legend to map
 legendAir.addTo(myMap);
 
+runAir();
 //Event handler to run code
 airDateType.on("change.air", runAir);
 airDate.on("change.air", runAir);
